@@ -26,3 +26,4 @@
 * Datenbank
 * Web-Schnittstelle
 * Clients (Mobile und Desktop)
+* Maps der Architektur sind im im File "Presentation of Task 01.pdf"
