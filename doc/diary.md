@@ -4,6 +4,6 @@
 - Keusen Alain
 - Meinen Nalet
 - Schmoker Tobis
-- Räss Michael
+- RÃ¤ss Michael
 - Zoss Reto
 
