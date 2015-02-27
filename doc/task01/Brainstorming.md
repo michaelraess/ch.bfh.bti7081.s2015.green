@@ -1,19 +1,19 @@
 # Brainstorming
  
- **Target Users**
+**Target Users**
  * Doktoren
  * Pflegepersonal
  * Sozialarbeiter
  * Sekretariat
  
- **Key Features**
+**Key Features**
  * Patienten Monitoring/History
  * User/Rollen-Management
  * Patienten Eigenschaften
  * Reporting
  * Mobility
  
- **Critical success factor**
+**Critical success factor**
  * Professionelles Projektmanagement
  * Frühzeitiges Erkennen von Risiken
  * Ausreichende Planung vor der Implementierung
