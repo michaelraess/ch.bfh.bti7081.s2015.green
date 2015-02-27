@@ -25,3 +25,4 @@
 * Zentrale Server-Infrastruktur
 * Datenbank
 * Web-Schnittstelle
+* Clients (Mobile und Desktop)
