@@ -21,3 +21,7 @@
  * Software
  * Finanzen
 
+**Components and architecture**
+* Zentrale Server-Infrastruktur
+* Datenbank
+* Web-Schnittstelle
