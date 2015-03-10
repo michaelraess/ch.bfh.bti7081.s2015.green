@@ -26,6 +26,7 @@
 - Was haben wir gemacht:
 -- Arbeiten an den Tasks "CS Task 1: First Analysis" und "CS Task 2: SE Process"
 -- Dokumente und Präsentationen für die Tasks erstellt
+-- Definiert, welche Gruppe welchen Part macht. Unsere Gruppe macht den Part für den Doktor.
 
 ## 03.03.2015
 - Wer war anwesend: Alain, Michael, Reto, Tobias, Sergii, Nalet
