@@ -48,3 +48,8 @@
 -- CS1 Task 3: Design Thinking
 --- Scoping
 --- Research
+--- Synthesize
+--- Fragekatalog erstellt
+- Wer macht was, bis wann?
+-- Sergii bringt am Freitag den ausgefüllten Fragekatalog in die Schule, damit wir mit den weiteren Tasks fortfahren können
+
