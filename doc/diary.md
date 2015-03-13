@@ -54,6 +54,7 @@
  - Sergii bringt am Freitag den ausgefüllten Fragekatalog in die Schule, damit wir mit den weiteren Tasks fortfahren können
 
 ## 12.03.2015
+- Wer war anwesend: Alain, Michael, Reto, Tobias, Sergii
 - via Hangouts:
  - Fragebogen wurde von Sergii weiterbearbeitet.
  - Übersetzen der Fragen ins Deutsche.
@@ -63,3 +64,13 @@
 - Wer war anwesend: Alain, Michael, Reto, Tobias, Sergii
 - Was haben wir gemacht:
  - CS1 Task 3: Design Thinking
+  - 1. und 2. Iteration durchgeführt.
+  - Präsentation und Dokumentation weitergeführt.
+- Wer macht was, bis wann?
+ - Tobias -> Mockups fertig stellen
+ - Nalet -> Präsentation
+ - Sergii -> Flow Diagram
+ - Alle -> übers Wochenende - merge am Montag!
+- Nächstes treffen
+ - Online, übers Wochenende
+ - Meeting, am Montag  
