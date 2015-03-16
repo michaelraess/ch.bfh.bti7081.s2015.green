@@ -74,3 +74,9 @@
 - Nächstes treffen
  - Online, übers Wochenende
  - Meeting, am Montag  
+
+## 16.03.2015
+- Wer war anwesend: Alain, Michael, Reto, Tobias, Sergii
+- Treffen in der Schule:
+ - letzte Validation durchgeführt.
+ - Präsentation fertiggestellt.
