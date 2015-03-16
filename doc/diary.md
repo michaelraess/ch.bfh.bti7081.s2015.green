@@ -69,14 +69,23 @@
 - Wer macht was, bis wann?
  - Tobias -> Mockups fertig stellen
  - Nalet -> Präsentation
- - Sergii -> Flow Diagram
+ - Sergii -> Flow-Diagramme
  - Alle -> übers Wochenende - merge am Montag!
 - Nächstes treffen
  - Online, übers Wochenende
  - Meeting, am Montag  
 
+## 15.03.2015
+- Wer war anwesend: Alain, Michael, Reto, Tobias, Sergii, Nalet
+- via Hangouts:
+ - Mockups beurteilt.
+ - Flow-Diagramme besprochen.
+
 ## 16.03.2015
-- Wer war anwesend: Alain, Michael, Reto, Tobias, Sergii
+- Wer war anwesend: Alain, Michael, Reto, Tobias, Sergii, Nalet
 - Treffen in der Schule:
- - letzte Validation durchgeführt.
  - Präsentation fertiggestellt.
+ - Dokumentation korrigiert und überarbeitet.
+ - letzte Validation durchgeführt.
+- Wer macht was:
+ - Nalet hält die Präsentation
