@@ -89,3 +89,16 @@
  - letzte Validation durchgeführt.
 - Wer macht was:
  - Nalet hält die Präsentation
+
+## 17.03.2015
+- Wer war anwesend: Michael, Reto, Tobias, Nalet
+- Was haben wir gemacht:
+ - Präsentation CS1 Task 3:
+ - Struktur eines typischen "Requirements Document" kennengelernt
+  - Wir sollen nur die Kapital machen, die auch Sinn machen!
+  - So präzise wie möglich! So geht am wenigsten Vergessen.
+ - Was müssen wir machen:
+  - Use Case Diagramme
+  - Use Case Szenario
+  - Als PDF abgeben!
+  - Vorlage ist auf dem Netz.
