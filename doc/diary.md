@@ -1,7 +1,6 @@
 # Green Group Diary
 ## Members
 - Bilousov Sergii
-- Keusen Alain
 - Meinen Nalet
 - Schmoker Tobias
 - Räss Michael
@@ -70,7 +69,7 @@
  - Tobias -> Mockups fertig stellen
  - Nalet -> Präsentation
  - Sergii -> Flow-Diagramme
- - Alle -> übers Wochenende - merge am Montag!
+ - Alle Validation -> übers Wochenende - merge am Montag!
 - Nächstes treffen
  - Online, übers Wochenende
  - Meeting, am Montag  
@@ -100,5 +99,22 @@
  - Was müssen wir machen:
   - Use Case Diagramme
   - Use Case Szenario
+   - Vorlage ist auf dem Netz.
   - Als PDF abgeben!
-  - Vorlage ist auf dem Netz.
+
+## 20.03.2015
+- Wer war anwesend: Michael, Reto, Tobias, Sergii, Nalet
+- Was haben wir gemacht:
+ - Dokument erstellt
+  - Einleitung
+  - User Requirements
+  - Use Case Diagramm
+  - Use Cases
+  - System Architecture 
+  - System Requirements
+  - System models
+  - System evolution
+  - Testing
+  - Appendices
+ - Präsentation
+  - Folien erstellt
