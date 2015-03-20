@@ -110,7 +110,7 @@
    - User Requirements
    - Use Case Diagramm
    - Use Cases
-   - System Architecture 
+   - System Architecture
    - System Requirements
    - System models
    - System evolution
