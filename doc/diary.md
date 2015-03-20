@@ -99,22 +99,22 @@
  - Was müssen wir machen:
   - Use Case Diagramme
   - Use Case Szenario
-   - Vorlage ist auf dem Netz.
+    - Vorlage ist auf dem Netz.
   - Als PDF abgeben!
 
 ## 20.03.2015
 - Wer war anwesend: Michael, Reto, Tobias, Sergii, Nalet
 - Was haben wir gemacht:
  - Dokument erstellt
-  - Einleitung
-  - User Requirements
-  - Use Case Diagramm
-  - Use Cases
-  - System Architecture 
-  - System Requirements
-  - System models
-  - System evolution
-  - Testing
-  - Appendices
+   - Einleitung
+   - User Requirements
+   - Use Case Diagramm
+   - Use Cases
+   - System Architecture 
+   - System Requirements
+   - System models
+   - System evolution
+   - Testing
+   - Appendices
  - Präsentation
-  - Folien erstellt
+   - Folien erstellt
