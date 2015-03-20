@@ -118,3 +118,12 @@
     - Appendices
  - Präsentation
     - Folien erstellt
+ - Wer macht was:
+  - Tobias: 
+    - 3. Iteration nachtragen (Biografie und Bezugsperson)
+    - Kapitel Testing
+  - Michael, Reto, Nalet:
+    - Dokument überarbeiten und gegebenenfalls ergänzen.
+    - Rechtschreibung
+  - Sergii:
+    - Präsentation (English) 
