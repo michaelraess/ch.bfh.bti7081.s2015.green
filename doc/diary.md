@@ -106,15 +106,15 @@
 - Wer war anwesend: Michael, Reto, Tobias, Sergii, Nalet
 - Was haben wir gemacht:
  - Dokument erstellt
-   - Einleitung
-   - User Requirements
-   - Use Case Diagramm
-   - Use Cases
-   - System Architecture
-   - System Requirements
-   - System models
-   - System evolution
-   - Testing
-   - Appendices
+    - Einleitung
+    - User Requirements
+    - Use Case Diagramm
+    - Use Cases
+    - System Architecture
+    - System Requirements
+    - System models
+    - System evolution
+    - Testing
+    - Appendices
  - Präsentation
-   - Folien erstellt
+    - Folien erstellt
