@@ -127,3 +127,8 @@
     - Rechtschreibung
   - Sergii:
     - Präsentation (English) 
+
+## 24.03.2015
+- Wer war anwesend: Michael, Sergii, Tobias, Nalet
+- Was haben wir gemacht:
+ - Präsentation CS1 Task 4
