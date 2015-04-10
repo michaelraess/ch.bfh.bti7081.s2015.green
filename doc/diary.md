@@ -132,3 +132,20 @@
 - Wer war anwesend: Michael, Sergii, Tobias, Nalet
 - Was haben wir gemacht:
  - Präsentation CS1 Task 4
+ - Revision Requirements Specification "Gruppe Blau"
+
+## 27.03.2015
+- Wer war anwesend: Michael, Tobias, Sergii, Reto, Nalet
+- Was haben wir gemacht:
+ - Präsentation Task 06
+ - Besprechung Requierements Specification
+
+## 07.04.2015
+- Wer war anwesend: Michael, Tobias, Reto, Nalet
+- Was haben wir gemacht:
+ - Übung Excercise 4
+
+## 10.04.2015
+- Wer war anwesend: Michael, Tobias, Sergii, Reto, Nalet
+- Was haben wir gemacht:
+ - CS1 Task 7: Domain Model and Sequence Diagram
