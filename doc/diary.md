@@ -1,7 +1,6 @@
 # Green Group Diary
 ## Members
 - Bilousov Sergii
-- Keusen Alain
 - Meinen Nalet
 - Schmoker Tobias
 - Räss Michael
@@ -70,7 +69,7 @@
  - Tobias -> Mockups fertig stellen
  - Nalet -> Präsentation
  - Sergii -> Flow-Diagramme
- - Alle -> übers Wochenende - merge am Montag!
+ - Alle Validation -> übers Wochenende - merge am Montag!
 - Nächstes treffen
  - Online, übers Wochenende
  - Meeting, am Montag  
@@ -100,5 +99,53 @@
  - Was müssen wir machen:
   - Use Case Diagramme
   - Use Case Szenario
+    - Vorlage ist auf dem Netz.
   - Als PDF abgeben!
-  - Vorlage ist auf dem Netz.
+
+## 20.03.2015
+- Wer war anwesend: Michael, Reto, Tobias, Sergii, Nalet
+- Was haben wir gemacht:
+ - Dokument erstellt
+    - Einleitung
+    - User Requirements
+    - Use Case Diagramm
+    - Use Cases
+    - System Architecture
+    - System Requirements
+    - System models
+    - System evolution
+    - Testing
+    - Appendices
+ - Präsentation
+    - Folien erstellt
+- Wer macht was:
+  - Tobias: 
+    - 3. Iteration nachtragen (Biografie und Bezugsperson)
+    - Kapitel Testing
+  - Michael, Reto, Nalet:
+    - Dokument überarbeiten und gegebenenfalls ergänzen.
+    - Rechtschreibung
+  - Sergii:
+    - Präsentation (English) 
+
+## 24.03.2015
+- Wer war anwesend: Michael, Sergii, Tobias, Nalet
+- Was haben wir gemacht:
+ - Präsentation CS1 Task 4
+ - Revision Requirements Specification "Gruppe Blau"
+
+## 27.03.2015
+- Wer war anwesend: Michael, Tobias, Sergii, Reto, Nalet
+- Was haben wir gemacht:
+ - Präsentation Task 06
+ - Besprechung Requierements Specification
+
+## 07.04.2015
+- Wer war anwesend: Michael, Tobias, Reto, Nalet
+- Was haben wir gemacht:
+ - Übung Excercise 4
+
+## 10.04.2015
+- Wer war anwesend: Michael, Tobias, Sergii, Reto, Nalet
+- Was haben wir gemacht:
+ - CS1 Task 7: Domain Model and Sequence Diagram
