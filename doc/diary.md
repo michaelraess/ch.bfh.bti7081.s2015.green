@@ -155,5 +155,6 @@
 - Was haben wir gemacht:
  - Präsentation Task 7
  - Design Patterns
+ - Task angekündigt für nächstes Mal
  
  
