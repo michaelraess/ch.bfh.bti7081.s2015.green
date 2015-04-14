@@ -137,7 +137,7 @@
 ## 27.03.2015
 - Wer war anwesend: Michael, Tobias, Sergii, Reto, Nalet
 - Was haben wir gemacht:
- - Präsentation Task 06
+ - Präsentation Task 6
  - Besprechung Requierements Specification
 
 ## 07.04.2015
@@ -149,3 +149,11 @@
 - Wer war anwesend: Michael, Tobias, Sergii, Reto, Nalet
 - Was haben wir gemacht:
  - CS1 Task 7: Domain Model and Sequence Diagram
+
+## 14.04.2015
+- Wer war anwesend: Reto, Nalet
+- Was haben wir gemacht:
+ - Präsentation Task 7
+ - Design Patterns
+ 
+ 
