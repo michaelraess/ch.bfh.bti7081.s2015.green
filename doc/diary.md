@@ -157,4 +157,13 @@
  - Design Patterns
  - Task angekündigt für nächstes Mal
  
- 
+## 21.04.2015
+- Wer war anwesend: Reto, Sergii
+- Was haben wir gemacht:
+ - Design Patterns
+ - Exercise 7 angefangen
+
+## 24.04.2015
+- Wer war anwesend: Reto, Sergii, Nalet
+- Was haben wir gemacht:
+ - Exercise 7 in div. Gruppen besprochen
