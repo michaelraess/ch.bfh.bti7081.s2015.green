@@ -167,3 +167,13 @@
 - Wer war anwesend: Reto, Sergii, Nalet
 - Was haben wir gemacht:
  - Exercise 7 in div. Gruppen besprochen
+
+## 28.04.2015
+- Wer war anwesend: Reto, Sergii, Nalet, Tobias, Michael
+- Was haben wir gemacht:
+ - Theorieblock
+  - Object-Oriented Design & Implementation
+  - Web Applications
+  - Vaadin Web Application Framework
+    - Observer Pattern
+    - MVC
