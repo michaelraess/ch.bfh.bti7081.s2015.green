@@ -177,3 +177,4 @@
   - Vaadin Web Application Framework
     - Observer Pattern
     - MVC
+ - Neuer Task [9: Software Architecture vorgestellt.](https://www.cpvrlab.ti.bfh.ch/bachelor/wm/BTI7081/soed/private/casestudy/CS1_Task9_v03.pdf)
