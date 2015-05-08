@@ -179,9 +179,21 @@
     - MVC
  - Neuer Task [9: Software Architecture vorgestellt.](https://www.cpvrlab.ti.bfh.ch/bachelor/wm/BTI7081/soed/private/casestudy/CS1_Task9_v03.pdf)
 
-# 01.05.2015
+# 05.05.2015
 - Wer war anwesend: Michael, Tobias, Sergii, Nalet, Reto
 - Was haben wir gemacht:
  - Vaadin eingerichtet
  - Task 9 gestartet
   - "Analysis & Design View": Class diagrams
+
+# 08.05.2015
+- Wer war anwesend: Michael, Tobias, Sergii, Nalet
+- Was haben wir gemacht:
+ - Präsentation Task 9
+ - Theorie
+
+# 01.05.2015
+- Wer war anwesend: Reto, Nalet
+- Was haben wir gemacht:
+ - Theorie
+ - Scrum Sprint
