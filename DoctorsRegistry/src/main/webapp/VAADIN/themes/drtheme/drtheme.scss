@@ -31,6 +31,18 @@
 
 @mixin drtheme {
   @include valo;
-
+  
+	.dashboard-title {
+		font-weight: 900;	
+	}
+	
+	.dashboard-placeholder {
+		border: 1px solid #ccc;
+		margin-bottom: 5px;
+		padding-left: 10px;
+		padding-top: 10px;
+		padding-bottom: 10px;
+	}
+  
   // Insert your own theme rules here
 }

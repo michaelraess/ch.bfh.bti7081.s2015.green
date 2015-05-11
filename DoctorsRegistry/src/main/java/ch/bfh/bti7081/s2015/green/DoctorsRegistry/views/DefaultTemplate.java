@@ -1,50 +1,37 @@
 package ch.bfh.bti7081.s2015.green.DoctorsRegistry.views;
 
-import com.vaadin.ui.AbstractLayout;
+import com.vaadin.server.Page;
+import com.vaadin.shared.ui.label.ContentMode;
+import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.Window;
 
-public class DefaultTemplate {
-	//Default Layout
-	private VerticalLayout body = null;
+public class DefaultTemplate extends VerticalLayout {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1125228132782581160L;
 	//Web Page Sections
 	//-- Header
 	private DefaultHeader header = null;
 	//-- Content
-	private AbstractLayout content = null;
+	private DefaultContent content = null;
 	//-- Footer
-	private AbstractLayout footer = null;
+	private DefaultFooter footer = null;
 	
-	public DefaultTemplate() {
-		this.body = new VerticalLayout();
-	}
-	
-	public Window renderTemplate(String windowTitle, String pageName) {
-		Window mainWindow = new Window(pageName + " | " + windowTitle);
-		mainWindow.setSizeFull();
+	public DefaultTemplate(Page page, String pageName) {
+		page.setTitle(pageName + " | Doctors Registry");
 		
-		//Load default (predefined header) if new has not been set
-		if(this.header == null) {
-			this.body.addComponent((new DefaultHeader()).renderHeader());
-		} else {
-			this.body.addComponent(this.header.renderHeader());
-		}
-		
-		//Load content if set
-		if(this.content != null) {
-			this.body.addComponent(this.content);
-		}
-		
-		//Load default footer if new is not set
-		if(this.footer == null) {
-			this.body.addComponent(new DefaultFooter());
-		} else {
-			this.body.addComponent(this.footer);
-		}
-		//Put everything to main body
-		mainWindow.setContent(this.body);
-		//Render to window
-		return mainWindow;
+		//Adding Header
+		this.header = new DefaultHeader(page);
+		this.addComponent(this.header);
+		//Adding hr
+		this.addComponent(new Label("<hr/>", ContentMode.HTML));
+		//Adding Content
+		this.content = new DefaultContent(page);
+		this.addComponent(this.content);
+		//Adding Footer
+		this.footer = new DefaultFooter(page);
+		this.addComponent(this.footer);
 	}
 
 	public DefaultHeader getHeader() {
@@ -55,19 +42,19 @@ public class DefaultTemplate {
 		this.header = header;
 	}
 
-	public AbstractLayout getContent() {
+	public DefaultContent getContent() {
 		return content;
 	}
 
-	public void setContent(AbstractLayout content) {
+	public void setContent(DefaultContent content) {
 		this.content = content;
 	}
 
-	public AbstractLayout getFooter() {
+	public DefaultFooter getFooter() {
 		return footer;
 	}
 
-	public void setFooter(AbstractLayout footer) {
+	public void setFooter(DefaultFooter footer) {
 		this.footer = footer;
 	}
 
