@@ -28,7 +28,7 @@ public class DefaultTemplate {
 			this.body.addComponent((new DefaultHeader()).renderHeader());
 		} else {
 			this.body.addComponent(this.header.renderHeader());
-		}
+		}//test
 		
 		//Load content if set
 		if(this.content != null) {
