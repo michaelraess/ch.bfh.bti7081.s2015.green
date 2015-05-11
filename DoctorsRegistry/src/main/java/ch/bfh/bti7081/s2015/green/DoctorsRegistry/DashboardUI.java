@@ -2,16 +2,14 @@ package ch.bfh.bti7081.s2015.green.DoctorsRegistry;
 
 import javax.servlet.annotation.WebServlet;
 
+import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.DefaultTemplate;
+
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.annotations.Widgetset;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.Label;
 import com.vaadin.ui.UI;
-import com.vaadin.ui.VerticalLayout;
 
 /**
  *
@@ -20,21 +18,15 @@ import com.vaadin.ui.VerticalLayout;
 @Widgetset("ch.bfh.bti7081.s2015.green.DoctorsRegistry.DrAppWidgetset")
 public class DashboardUI extends UI {
 
-    @Override
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -8781446538751439955L;
+
+	@Override
     protected void init(VaadinRequest vaadinRequest) {
-        final VerticalLayout layout = new VerticalLayout();
-        layout.setMargin(true);
-        setContent(layout);
-
-        Button button = new Button("Click Me");
-        button.addClickListener(new Button.ClickListener() {
-            @Override
-            public void buttonClick(ClickEvent event) {
-                layout.addComponent(new Label("Thank you for clicking"));
-            }
-        });
-        layout.addComponent(button);
-
+		DefaultTemplate dt = new DefaultTemplate();
+        dt.renderTemplate("DoctorsRegistry", "Dashboard");
     }
 
     @WebServlet(urlPatterns = "/*", name = "DashboardUIServlet", asyncSupported = true)
