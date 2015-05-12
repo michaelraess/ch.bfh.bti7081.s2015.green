@@ -26,9 +26,9 @@ public class CasesUI extends UI {
 
 		// Adding Menu
 		dt.getHeader().addMenuItem("Dashboard", "/");
-		dt.getHeader().addMenuItem("Fälle", "/cases");
-		dt.getHeader().addMenuItem("Termine", "/appointments");
-		dt.getHeader().addMenuItem("Patienten", "/patients");
+		dt.getHeader().addMenuItem("Fälle", "/cases/");
+		dt.getHeader().addMenuItem("Termine", "/appointments/");
+		dt.getHeader().addMenuItem("Patienten", "/patients/");
 		
 		// Adding content
 		VerticalLayout rightLayout = new VerticalLayout();
