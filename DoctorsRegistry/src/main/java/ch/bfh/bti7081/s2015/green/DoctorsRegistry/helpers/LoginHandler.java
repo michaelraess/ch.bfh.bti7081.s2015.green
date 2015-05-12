@@ -1,5 +1,6 @@
-package ch.bfh.bti7081.s2015.green.DoctorsRegistry;
+package ch.bfh.bti7081.s2015.green.DoctorsRegistry.helpers;
 
+import ch.bfh.bti7081.s2015.green.DoctorsRegistry.DashboardUI;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.LoginView;
 
 import com.vaadin.navigator.Navigator;
