@@ -5,10 +5,12 @@ import javax.servlet.annotation.WebServlet;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.AppointmentPlaceholder;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.DefaultTemplate;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.LastCasePlaceholder;
+import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.LoginView;
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.annotations.Widgetset;
+import com.vaadin.navigator.Navigator;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.Alignment;
@@ -30,6 +32,27 @@ public class DashboardUI extends UI {
 
 	@Override
     protected void init(VaadinRequest vaadinRequest) {
+		
+		new Navigator(this, this);
+
+        //
+        // The initial log view where the user can login to the application
+        //
+        getNavigator().addView(LoginView.NAME, LoginView.class);//
+
+        LoginHandler.setUI(this);
+		
+		if(LoginHandler.isLoggedIn()) {
+			createMainView();
+		}else{
+			LoginHandler.setNavigator(getNavigator());
+			getNavigator().navigateTo(LoginView.NAME);	
+		}
+		
+		
+    }
+
+	public void createMainView() {
 		DefaultTemplate dt = new DefaultTemplate(this.getPage(), "Dashboard");
 		
 		//Adding Menu
@@ -75,7 +98,7 @@ public class DashboardUI extends UI {
 		
 		//Rendering page
 		this.setContent(dt);
-    }
+	}
 
     @WebServlet(urlPatterns = "/*", name = "DashboardUIServlet", asyncSupported = true)
     @VaadinServletConfiguration(ui = DashboardUI.class, productionMode = false)
