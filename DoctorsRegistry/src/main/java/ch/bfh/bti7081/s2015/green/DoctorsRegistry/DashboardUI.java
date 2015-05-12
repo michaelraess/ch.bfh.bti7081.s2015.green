@@ -2,6 +2,7 @@ package ch.bfh.bti7081.s2015.green.DoctorsRegistry;
 
 import javax.servlet.annotation.WebServlet;
 
+import ch.bfh.bti7081.s2015.green.DoctorsRegistry.helpers.LoginHandler;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.AppointmentPlaceholder;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.DefaultTemplate;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.LastCasePlaceholder;
@@ -46,7 +47,7 @@ public class DashboardUI extends UI {
 			createMainView();
 		}else{
 			LoginHandler.setNavigator(getNavigator());
-			getNavigator().navigateTo(LoginView.NAME);	
+			getNavigator().navigateTo(LoginView.NAME);
 		}
 		
 		

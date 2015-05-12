@@ -1,6 +1,6 @@
 package ch.bfh.bti7081.s2015.green.DoctorsRegistry.views;
 
-import ch.bfh.bti7081.s2015.green.DoctorsRegistry.LoginHandler;
+import ch.bfh.bti7081.s2015.green.DoctorsRegistry.helpers.LoginHandler;
 
 import com.vaadin.data.validator.AbstractValidator;
 import com.vaadin.data.validator.EmailValidator;
