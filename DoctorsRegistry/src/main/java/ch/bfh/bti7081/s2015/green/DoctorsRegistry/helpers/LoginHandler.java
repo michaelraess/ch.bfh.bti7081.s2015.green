@@ -1,39 +1,51 @@
 package ch.bfh.bti7081.s2015.green.DoctorsRegistry.helpers;
 
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.DashboardUI;
-import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.LoginView;
+import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.Login;
 
 import com.vaadin.navigator.Navigator;
+import com.vaadin.server.VaadinSession;
 
 
 public class LoginHandler {
 	
-	static boolean isLoggedIn = false;
-	static Navigator navigator;
-	static DashboardUI ui;
+	boolean isLoggedIn = false;
+	Navigator navigator;
+	DashboardUI ui;
 
-	public static boolean isLoggedIn() {
+	public boolean isLoggedIn() {
 		// TODO Auto-generated method stub
+		System.out.println("isLoggedIn: " + isLoggedIn);
 		return isLoggedIn;
 	}
 
-	public static void setIsLoggedIn(boolean b) {
+	public void setIsLoggedIn(boolean b) {
 		// TODO Auto-generated method stub
 		isLoggedIn = b;
 	}
 
-	public static void setNavigator(Navigator navigator) {
-		LoginHandler.navigator = navigator;
+	public void setNavigator(Navigator navigator) {
+		this.navigator = navigator;
 	}
 
-	public static void toMain() {
-		navigator.removeView(LoginView.NAME);
+	public void toMain() {
+		navigator.removeView(Login.NAME);
 		ui.createMainView();
 		
 	}
 
-	public static void setUI(DashboardUI dashboardUI) {
+	public void setUI(DashboardUI dashboardUI) {
 		ui = dashboardUI;
+	}
+	
+	public static LoginHandler getLoginHandler() {
+		VaadinSession vs = VaadinSession.getCurrent();
+		
+		if(vs.getAttribute(LoginHandler.class) == null) {	
+			vs.setAttribute(LoginHandler.class, new LoginHandler());
+		}
+		
+		return vs.getAttribute(LoginHandler.class);
 	}
 	
 }
