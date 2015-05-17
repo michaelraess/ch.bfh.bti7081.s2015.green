@@ -12,7 +12,7 @@ import com.vaadin.ui.declarative.Design;
 public class Dashboard extends VerticalLayout implements View{
 	
 	public static final String NAME = "dashboard";
-	public static final String MENUNAME = "Login";
+	public static final String MENUNAME = "Dashboard";
 	
 	Table table;
 	

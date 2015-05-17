@@ -2,6 +2,7 @@ package ch.bfh.bti7081.s2015.green.DoctorsRegistry;
 
 import javax.servlet.annotation.WebServlet;
 
+import ch.bfh.bti7081.s2015.green.DoctorsRegistry.helpers.LoginHandler;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.helpers.MenuNavigatorHelper;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.AppointmentPlaceholder;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.Cases;
@@ -28,8 +29,21 @@ import com.vaadin.ui.VerticalLayout;
 @Theme("drtheme")
 @Widgetset("ch.bfh.bti7081.s2015.green.DoctorsRegistry.DrAppWidgetset")
 public class DoctorsRegisteryUI extends UI {
+	
+	private MenuNavigatorHelper menuNavigatorHelper = new MenuNavigatorHelper();
 
-    /**
+    public MenuNavigatorHelper getMenuNavigatorHelper() {
+		return menuNavigatorHelper;
+	}
+
+
+
+	public void setMenuNavigatorHelper(MenuNavigatorHelper menuNavigatorHelper) {
+		this.menuNavigatorHelper = menuNavigatorHelper;
+	}
+
+
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -8781446538751439955L;
@@ -58,13 +72,23 @@ public class DoctorsRegisteryUI extends UI {
 		
 //		createMainView();
 		
+		
+		
 		new Navigator(this, this);
-		MenuNavigatorHelper.addViewWithMenu(getNavigator(), Dashboard.NAME, Dashboard.MENUNAME, Dashboard.class);
-		MenuNavigatorHelper.addViewWithMenu(getNavigator(), Cases.NAME, Cases.MENUNAME, Cases.class);
-		MenuNavigatorHelper.addViewWithMenu(getNavigator(), Patients.NAME, Patients.MENUNAME, Patients.class);
-		MenuNavigatorHelper.addView(getNavigator(), Login.NAME, Login.class);
-
- 		getNavigator().navigateTo(Login.NAME);
+		
+		// Here, you add to views to menu, that you want to display in the menu.
+		this.menuNavigatorHelper.addViewWithMenu(getNavigator(), Dashboard.NAME, Dashboard.MENUNAME, Dashboard.class);
+		this.menuNavigatorHelper.addViewWithMenu(getNavigator(), Cases.NAME, Cases.MENUNAME, Cases.class);
+		this.menuNavigatorHelper.addViewWithMenu(getNavigator(), Patients.NAME, Patients.MENUNAME, Patients.class);
+		this.menuNavigatorHelper.addView(getNavigator(), Login.NAME, Login.class);
+		
+		if(LoginHandler.getLoginHandler().isLoggedIn()){
+			getNavigator().navigateTo(Dashboard.NAME);
+		}else{
+			getNavigator().navigateTo(Login.NAME);
+		}
+		
+ 		
     }
 	
 	

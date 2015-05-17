@@ -5,10 +5,12 @@
 	content="my:ch.bfh.bti7081.s2015.green.DoctorsRegistry.components">
 </head>
 <body>
-	<v-horizontal-layout> 
-		<v-image width="50px" source="VAADIN/images/logo.jpg"></v-image>
+	<v-horizontal-layout size-full :expand> 
+		<v-image width="50px" id="logo" :left></v-image>
 		
-<v-menu-bar id="menu"></v-menu-bar>
-		<v-text-field value="Suche..."></v-text-field>
+		<v-menu-bar id="menu" :left></v-menu-bar>
+		<v-label id="labelUser" :right></v-label>
+		<v-text-field value="Suche..." :right></v-text-field>
+		
 	</v-horizontal-layout>
 </body>

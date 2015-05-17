@@ -1,41 +1,30 @@
 package ch.bfh.bti7081.s2015.green.DoctorsRegistry.helpers;
 
-import ch.bfh.bti7081.s2015.green.DoctorsRegistry.DoctorsRegisteryUI;
-import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.Login;
-
 import com.vaadin.navigator.Navigator;
 import com.vaadin.server.VaadinSession;
+import com.vaadin.ui.Label;
 
 
 public class LoginHandler {
 	
 	boolean isLoggedIn = false;
 	Navigator navigator;
-	DoctorsRegisteryUI ui;
+	private String eMail;
 
 	public boolean isLoggedIn() {
-		// TODO Auto-generated method stub
-		System.out.println("isLoggedIn: " + isLoggedIn);
 		return isLoggedIn;
 	}
 
-	public void setIsLoggedIn(boolean b) {
+	public void setLoggedIn(boolean b) {
 		// TODO Auto-generated method stub
 		isLoggedIn = b;
 	}
-
-	public void setNavigator(Navigator navigator) {
-		this.navigator = navigator;
-	}
-
-	public void toMain() {
-		navigator.removeView(Login.NAME);
-		ui.createMainView();
-		
-	}
-
-	public void setUI(DoctorsRegisteryUI dashboardUI) {
-		ui = dashboardUI;
+	
+	public boolean authenticate(String eMail, String password) {
+		this.eMail = eMail;
+		// TODO Implement Login
+		this.isLoggedIn = true;
+		return true; // TODO create check;
 	}
 	
 	public static LoginHandler getLoginHandler() {
@@ -46,6 +35,10 @@ public class LoginHandler {
 		}
 		
 		return vs.getAttribute(LoginHandler.class);
+	}
+
+	public String getUserName() {
+		return eMail;
 	}
 	
 }

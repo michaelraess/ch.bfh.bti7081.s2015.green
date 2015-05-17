@@ -66,11 +66,14 @@ public class Login extends VerticalLayout implements View{
 //		setCompositionRoot(viewLayout);
 		Design.read(this);
 		
+		
+		
 		this.loginButton.addListener(new Listener() {
 
 			@Override
 			public void componentEvent(Event event) {
-				getUI().getNavigator().navigateTo(Dashboard.NAME);				
+				LoginHandler.getLoginHandler().authenticate(eMail.getValue(), password.getValue());
+				getUI().getNavigator().navigateTo(Dashboard.NAME);
 			}
 			
 		});

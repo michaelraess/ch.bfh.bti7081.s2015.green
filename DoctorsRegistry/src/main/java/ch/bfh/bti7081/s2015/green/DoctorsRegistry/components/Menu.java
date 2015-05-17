@@ -1,33 +1,39 @@
 package ch.bfh.bti7081.s2015.green.DoctorsRegistry.components;
 
-import ch.bfh.bti7081.s2015.green.DoctorsRegistry.helpers.MenuNavigatorHelper;
+import java.io.File;
+
+import ch.bfh.bti7081.s2015.green.DoctorsRegistry.DoctorsRegisteryUI;
+import ch.bfh.bti7081.s2015.green.DoctorsRegistry.helpers.LoginHandler;
 
 import com.vaadin.annotations.DesignRoot;
+import com.vaadin.server.FileResource;
+import com.vaadin.server.VaadinService;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Image;
+import com.vaadin.ui.Label;
 import com.vaadin.ui.MenuBar;
 import com.vaadin.ui.MenuBar.MenuItem;
 import com.vaadin.ui.declarative.Design;
 @DesignRoot
 public class Menu extends HorizontalLayout {
 	MenuBar menu;
+	Image logo;
+	Label labelUser;
 	
 	public Menu() {
 		Design.read(this);
-
-//		addMenuItem(menu, "Dashboard", "/");
-//		addMenuItem(menu, "Fälle", "/cases/");
-//		addMenuItem(menu, "Termine", "/appointments/");
-//		addMenuItem(menu, "Patienten", "/patients/");
-		
 		generateMenusFromViews();
-
+		logo.setSource(new FileResource(new File(VaadinService.getCurrent().getBaseDirectory().getAbsolutePath() + "/VAADIN/images/logo.jpg")));
+		this.labelUser.setValue("You are logged in as: " + LoginHandler.getLoginHandler().getUserName());
 	}
 	
 	private void generateMenusFromViews() {
-		//MenuNavigator navigator = (MenuNavigator)getUI().getNavigator();
-		//navigator.
 		
-		for (ch.bfh.bti7081.s2015.green.DoctorsRegistry.helpers.MenuItem menuItem : MenuNavigatorHelper.MENUITEMS) {
+		/* Here, we fetch the Registered Views
+		   (registered with this.menuNavigatorHelper.addViewWithMenu(getNavigator(), Dashboard.NAME, Dashboard.MENUNAME, Dashboard.class);)
+		   and add it to the Menu.
+		 */
+		for (ch.bfh.bti7081.s2015.green.DoctorsRegistry.helpers.MenuItem menuItem : ((DoctorsRegisteryUI)DoctorsRegisteryUI.getCurrent()).getMenuNavigatorHelper().getMenuItems()) {
 			addMenuItem(this.menu, menuItem.getViewMenuName(), menuItem.getViewName());
 		}
 		

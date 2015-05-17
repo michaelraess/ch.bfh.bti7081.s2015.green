@@ -5,12 +5,14 @@
 	content="my:ch.bfh.bti7081.s2015.green.DoctorsRegistry.components">
 </head>
 <body>
-	<v-vertical-layout spacing margin>
-	    <v-label><h3>Sign In</h3></v-label>
-	    <v-horizontal-layout spacing>
-	        <v-text-field id="eMail" caption="Email" />
-	        <v-password-field id="password" caption="Password" />
-	    </v-horizontal-layout>
-	    <v-button id="loginButton" style-name="primary">Sign In</v-button>
-	</v-vertical-layout>
+	<v-panel height="40%" width="40%">
+		<v-vertical-layout spacing margin>
+		    <v-label><h3>Sign In</h3></v-label>
+		    <v-horizontal-layout spacing>
+		        <v-text-field id="eMail" caption="Email" />
+		        <v-password-field id="password" caption="Password" />
+		    </v-horizontal-layout>
+		    <v-button id="loginButton" style-name="primary">Sign In</v-button>
+		</v-vertical-layout>
+	</v-panel>
 </body>
