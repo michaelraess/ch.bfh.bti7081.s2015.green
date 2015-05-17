@@ -4,10 +4,12 @@ import javax.servlet.annotation.WebServlet;
 
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.helpers.MenuNavigatorHelper;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.AppointmentPlaceholder;
+import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.Cases;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.Dashboard;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.DefaultTemplate;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.LastCasePlaceholder;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.Login;
+import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.Patients;
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
@@ -25,7 +27,7 @@ import com.vaadin.ui.VerticalLayout;
  */
 @Theme("drtheme")
 @Widgetset("ch.bfh.bti7081.s2015.green.DoctorsRegistry.DrAppWidgetset")
-public class DashboardUI extends UI {
+public class DoctorsRegisteryUI extends UI {
 
     /**
 	 * 
@@ -58,6 +60,8 @@ public class DashboardUI extends UI {
 		
 		new Navigator(this, this);
 		MenuNavigatorHelper.addViewWithMenu(getNavigator(), Dashboard.NAME, Dashboard.MENUNAME, Dashboard.class);
+		MenuNavigatorHelper.addViewWithMenu(getNavigator(), Cases.NAME, Cases.MENUNAME, Cases.class);
+		MenuNavigatorHelper.addViewWithMenu(getNavigator(), Patients.NAME, Patients.MENUNAME, Patients.class);
 		MenuNavigatorHelper.addView(getNavigator(), Login.NAME, Login.class);
 
  		getNavigator().navigateTo(Login.NAME);
@@ -73,15 +77,6 @@ public class DashboardUI extends UI {
 		dt.getHeader().addMenuItem("Fälle", "/cases/");
 		dt.getHeader().addMenuItem("Termine", "/appointments/");
 		dt.getHeader().addMenuItem("Patienten", "/patients/");
-<<<<<<< HEAD
-		
-		//Adding content
-		//--Left Column
-=======
-
-		// Adding content
-		// --Left Column
->>>>>>> nalet
 		VerticalLayout leftLayout = new VerticalLayout();
 		leftLayout.setSizeFull();
 		Label nt = new Label("Nächste Termine");
@@ -125,7 +120,7 @@ public class DashboardUI extends UI {
 
 
     @WebServlet(urlPatterns = "/*", name = "DashboardUIServlet", asyncSupported = true)
-    @VaadinServletConfiguration(ui = DashboardUI.class, productionMode = false)
+    @VaadinServletConfiguration(ui = DoctorsRegisteryUI.class, productionMode = false)
     public static class DashboardUIServlet extends VaadinServlet {
     }
 }

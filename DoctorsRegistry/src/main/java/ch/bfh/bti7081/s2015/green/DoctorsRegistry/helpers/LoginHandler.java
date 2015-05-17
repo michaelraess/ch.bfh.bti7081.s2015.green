@@ -1,6 +1,6 @@
 package ch.bfh.bti7081.s2015.green.DoctorsRegistry.helpers;
 
-import ch.bfh.bti7081.s2015.green.DoctorsRegistry.DashboardUI;
+import ch.bfh.bti7081.s2015.green.DoctorsRegistry.DoctorsRegisteryUI;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.Login;
 
 import com.vaadin.navigator.Navigator;
@@ -11,7 +11,7 @@ public class LoginHandler {
 	
 	boolean isLoggedIn = false;
 	Navigator navigator;
-	DashboardUI ui;
+	DoctorsRegisteryUI ui;
 
 	public boolean isLoggedIn() {
 		// TODO Auto-generated method stub
@@ -34,7 +34,7 @@ public class LoginHandler {
 		
 	}
 
-	public void setUI(DashboardUI dashboardUI) {
+	public void setUI(DoctorsRegisteryUI dashboardUI) {
 		ui = dashboardUI;
 	}
 	

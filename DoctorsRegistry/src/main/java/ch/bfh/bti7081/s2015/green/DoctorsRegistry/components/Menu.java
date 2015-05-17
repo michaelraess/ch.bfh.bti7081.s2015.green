@@ -14,15 +14,12 @@ public class Menu extends HorizontalLayout {
 	public Menu() {
 		Design.read(this);
 
-		addMenuItem(menu, "Dashboard", "/");
-		addMenuItem(menu, "Fälle", "/cases/");
-		addMenuItem(menu, "Termine", "/appointments/");
-		addMenuItem(menu, "Patienten", "/patients/");
+//		addMenuItem(menu, "Dashboard", "/");
+//		addMenuItem(menu, "Fälle", "/cases/");
+//		addMenuItem(menu, "Termine", "/appointments/");
+//		addMenuItem(menu, "Patienten", "/patients/");
 		
 		generateMenusFromViews();
-		
-		
-		
 
 	}
 	
@@ -30,10 +27,14 @@ public class Menu extends HorizontalLayout {
 		//MenuNavigator navigator = (MenuNavigator)getUI().getNavigator();
 		//navigator.
 		
+		for (ch.bfh.bti7081.s2015.green.DoctorsRegistry.helpers.MenuItem menuItem : MenuNavigatorHelper.MENUITEMS) {
+			addMenuItem(this.menu, menuItem.getViewMenuName(), menuItem.getViewName());
+		}
+		
 	}
 
-	public void addMenuItem(MenuBar menu, String value, final String link) {
-		menu.addItem(value,  new MenuBar.Command() {
+	public void addMenuItem(MenuBar menu, String viewMenuName, final String viewName) {
+		menu.addItem(viewMenuName,  new MenuBar.Command() {
 			
 			/**
 			 * 
@@ -42,7 +43,7 @@ public class Menu extends HorizontalLayout {
 
 			@Override
 			public void menuSelected(MenuItem selectedItem) {
-				//
+				getUI().getNavigator().navigateTo(viewName);
 			}
 		});
 	}
