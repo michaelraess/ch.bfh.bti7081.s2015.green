@@ -31,7 +31,10 @@
 
 @mixin drtheme {
   @include valo;
-  
+	.main {
+		margin: 10px 0px 10px 0px;
+	}
+	
 	.dashboard-title {
 		font-weight: 900;	
 	}
