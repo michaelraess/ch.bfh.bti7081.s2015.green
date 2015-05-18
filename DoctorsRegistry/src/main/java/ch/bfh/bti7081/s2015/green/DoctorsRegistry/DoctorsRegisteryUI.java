@@ -8,6 +8,7 @@ import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.AppointmentPlaceholder;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.Cases;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.Dashboard;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.DefaultTemplate;
+import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.Example;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.LastCasePlaceholder;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.Login;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.Patients;
@@ -80,6 +81,7 @@ public class DoctorsRegisteryUI extends UI {
 		this.menuNavigatorHelper.addViewWithMenu(getNavigator(), Dashboard.NAME, Dashboard.MENUNAME, Dashboard.class);
 		this.menuNavigatorHelper.addViewWithMenu(getNavigator(), Cases.NAME, Cases.MENUNAME, Cases.class);
 		this.menuNavigatorHelper.addViewWithMenu(getNavigator(), Patients.NAME, Patients.MENUNAME, Patients.class);
+		this.menuNavigatorHelper.addViewWithMenu(getNavigator(), Example.NAME, Example.MENUNAME, Example.class);
 		this.menuNavigatorHelper.addView(getNavigator(), Login.NAME, Login.class);
 		
 		if(LoginHandler.getLoginHandler().isLoggedIn()){
