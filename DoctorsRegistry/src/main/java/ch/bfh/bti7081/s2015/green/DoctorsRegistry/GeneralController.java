@@ -72,7 +72,7 @@ public class GeneralController extends UI {
 		AppointmentsView appointments = new AppointmentsView();
 		tabsheet.addTab(appointments, "Termine", new ThemeResource("images/appointments_icon_30.jpg"));
 		
-		//Cases
+		//Patients
 		PatientsView patients = new PatientsView();
 		tabsheet.addTab(patients, "Patienten", new ThemeResource("images/patient_icon_30.png"));
 		
