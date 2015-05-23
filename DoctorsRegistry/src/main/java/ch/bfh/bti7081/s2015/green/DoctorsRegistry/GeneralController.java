@@ -1,7 +1,15 @@
 package ch.bfh.bti7081.s2015.green.DoctorsRegistry;
 
+import java.util.ArrayList;
+
 import javax.servlet.annotation.WebServlet;
 
+import org.neo4j.graphdb.GraphDatabaseService;
+import org.neo4j.graphdb.Node;
+import org.neo4j.rest.graphdb.RestGraphDatabase;
+
+import ch.bfh.bti7081.s2015.green.DoctorsRegistry.entity.User;
+import ch.bfh.bti7081.s2015.green.DoctorsRegistry.models.UserModel;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.AppointmentsView;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.CasesView;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.DashboardView;
@@ -74,7 +82,27 @@ public class GeneralController extends UI {
 		copyright.setSizeUndefined();
 		mainVl.addComponent(copyright);
 		mainVl.setComponentAlignment(copyright, Alignment.TOP_CENTER);
+		
+		//GraphDatabaseService graphDb = new RestGraphDatabase(DATABASE_ENDPOINT, DATABASE_USERNAME, DATABASE_PASSWORD);
+		
+		/*Node n = graphDb.createNode();
+		n.setProperty("Email", "sergii.bilousov@gmail.com");*/
+		
+		UserModel um = new UserModel(DATABASE_ENDPOINT, DATABASE_USERNAME, DATABASE_PASSWORD);
+		
+		ArrayList<User> allUsers = um.getAllUsers(25);
+		for(User u:allUsers) {
+			Label l = new Label(u.getEmail() + " " + u.getPassword());
+			mainVl.addComponent(l);
+		}
+		
+		
 	}
+	
+    public static final String DATABASE_ENDPOINT = "http://178.62.254.192:7474/db/data";
+    public static final String DATABASE_USERNAME = "neo4j";
+    public static final String DATABASE_PASSWORD = "qwerty1";
+ 
 	
 	@WebServlet(urlPatterns = "/*", name = "GeneralUIServlet", asyncSupported = true)
     @VaadinServletConfiguration(ui = GeneralController.class, productionMode = false)
