@@ -1,33 +1,25 @@
 package ch.bfh.bti7081.s2015.green.DoctorsRegistry;
 
-import java.util.ArrayList;
-
 import javax.servlet.annotation.WebServlet;
 
-import org.neo4j.graphdb.GraphDatabaseService;
-import org.neo4j.graphdb.Node;
-import org.neo4j.rest.graphdb.RestGraphDatabase;
-
-import ch.bfh.bti7081.s2015.green.DoctorsRegistry.entity.User;
-import ch.bfh.bti7081.s2015.green.DoctorsRegistry.models.UserModel;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.AppointmentsView;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.CasesView;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.DashboardView;
+import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.Menu;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.PatientsView;
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.annotations.Widgetset;
-import com.vaadin.server.ThemeResource;
+import com.vaadin.navigator.Navigator;
+import com.vaadin.navigator.ViewChangeListener;
+import com.vaadin.server.FontAwesome;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
-import com.vaadin.shared.ui.label.ContentMode;
-import com.vaadin.ui.Alignment;
-import com.vaadin.ui.Image;
-import com.vaadin.ui.Label;
-import com.vaadin.ui.TabSheet;
+import com.vaadin.server.VaadinSession;
+import com.vaadin.ui.CssLayout;
+import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.UI;
-import com.vaadin.ui.VerticalLayout;
 
 @Theme("drtheme")
 @Widgetset("ch.bfh.bti7081.s2015.green.DoctorsRegistry.DrAppWidgetset")
@@ -37,17 +29,51 @@ public class GeneralController extends UI {
 	 * 
 	 */
 	private static final long serialVersionUID = 5390254949054698917L;
+	
+	//Variables
+	Menu menu = null;
 
 	@Override
 	protected void init(VaadinRequest request) {
+		//Set Session timeout to 3000s
+		VaadinSession.getCurrent().getSession().setMaxInactiveInterval(3000);
+		//Change Page title
+		this.getPage().setTitle("Doctors Registry");
+		//Prepare the template page
 		createMainView();
+		
+		
 	}
 	
 	public void createMainView() {
-		this.getPage().setTitle("Doctors Registry");
-		VerticalLayout mainVl = new VerticalLayout();
-		mainVl.setStyleName("main");
-		this.setContent(mainVl);	
+		//Create Main Container for Views
+		HorizontalLayout mainVl = new HorizontalLayout();
+		mainVl.setSizeFull();
+		this.setContent(mainVl);
+		
+		CssLayout viewContainer = new CssLayout();
+        viewContainer.addStyleName("valo-content");
+        viewContainer.setSizeFull();
+		
+		//Init Navigator
+		final Navigator navigator = new Navigator(this, viewContainer);
+		
+		//Menu
+		menu = new Menu(navigator);
+		menu.addView(new DashboardView(), "", DashboardView.NAME, FontAwesome.EDIT);
+		menu.addView(new CasesView(), CasesView.NAME, CasesView.NAME, FontAwesome.EDIT);
+		menu.addView(new PatientsView(), PatientsView.NAME, PatientsView.NAME, FontAwesome.EDIT);
+		menu.addView(new AppointmentsView(), AppointmentsView.NAME, AppointmentsView.NAME, FontAwesome.EDIT);
+		
+		navigator.addViewChangeListener(viewChangeListener);
+		
+		mainVl.addComponent(menu);
+		mainVl.addComponent(viewContainer);
+		mainVl.setExpandRatio(viewContainer, 1);
+		/*
+		
+		
+		this.setContent(mainVl);
 		
 		//Put logo
 		Image logo = new Image();
@@ -84,20 +110,28 @@ public class GeneralController extends UI {
 		mainVl.setComponentAlignment(copyright, Alignment.TOP_CENTER);
 		
 		//GraphDatabaseService graphDb = new RestGraphDatabase(DATABASE_ENDPOINT, DATABASE_USERNAME, DATABASE_PASSWORD);
-		
+		*/
 		/*Node n = graphDb.createNode();
 		n.setProperty("Email", "sergii.bilousov@gmail.com");*/
 		
-		UserModel um = new UserModel(DATABASE_ENDPOINT, DATABASE_USERNAME, DATABASE_PASSWORD);
-		
-		ArrayList<User> allUsers = um.getAllUsers(25);
-		for(User u:allUsers) {
-			Label l = new Label(u.getEmail() + " " + u.getPassword());
-			mainVl.addComponent(l);
-		}
-		
-		
+		//UserModel um = new UserModel(DATABASE_ENDPOINT, DATABASE_USERNAME, DATABASE_PASSWORD);
 	}
+	
+	// notify the view menu about view changes so that it can display which view
+    // is currently active
+    ViewChangeListener viewChangeListener = new ViewChangeListener() {
+
+        @Override
+        public boolean beforeViewChange(ViewChangeEvent event) {
+            return true;
+        }
+
+        @Override
+        public void afterViewChange(ViewChangeEvent event) {
+            menu.setActiveView(event.getViewName());
+        }
+
+    };
 	
     public static final String DATABASE_ENDPOINT = "http://178.62.254.192:7474/db/data";
     public static final String DATABASE_USERNAME = "neo4j";

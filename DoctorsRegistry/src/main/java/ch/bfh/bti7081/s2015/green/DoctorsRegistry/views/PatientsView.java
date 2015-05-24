@@ -1,13 +1,15 @@
 package ch.bfh.bti7081.s2015.green.DoctorsRegistry.views;
 
+import com.vaadin.navigator.View;
+import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.shared.ui.label.ContentMode;
-import com.vaadin.ui.Alignment;
 import com.vaadin.ui.CssLayout;
-import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
 
-public class PatientsView extends VerticalLayout {
+public class PatientsView extends VerticalLayout implements View {
+	
+	public static final String NAME = "Patients";
 
 	/**
 	 * 
@@ -36,6 +38,12 @@ public class PatientsView extends VerticalLayout {
 		wrapper.addComponent(patients);
 		
 		this.addComponent(wrapper);
+	}
+
+	@Override
+	public void enter(ViewChangeEvent event) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

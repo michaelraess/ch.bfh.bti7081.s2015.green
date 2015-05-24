@@ -7,6 +7,8 @@ import org.neo4j.graphdb.Node;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.entity.User;
 
 public class UserModel extends DefaultModel {
+	
+	private final String LABEL = "User";
 
 	public UserModel(String uri, String user, String password) {
 		super(uri, user, password);
@@ -15,7 +17,9 @@ public class UserModel extends DefaultModel {
 	public ArrayList<User> getAllUsers(int limit) {
 		ArrayList<User> userList = new ArrayList<User>();
 		
-		Iterable<Node> resUsers = this.getQueryEngine().query("MATCH (n:User) RETURN n", null).to(Node.class);
+		String queryString = String.format("MATCH (n:%s) RETURN n", LABEL);
+		
+		Iterable<Node> resUsers = this.getQueryEngine().query(queryString, null).to(Node.class);
 		
 		for(Node resUser : resUsers) {
 			User user = new User();
@@ -32,7 +36,9 @@ public class UserModel extends DefaultModel {
 	}
 	
 	public void addUser(String email, String password) {
-		String queryString = String.format("CREATE (n:User { email : '%s', password : '%s' })", email, password);
+		int nextId = this.getLastIdFor(LABEL) + 1;
+		
+		String queryString = String.format("CREATE (n:%s { id : %d, email : '%s', password : '%s' })", LABEL, nextId, email, password);
 		this.getQueryEngine().query(queryString, null).to(Node.class);
 	}
 
