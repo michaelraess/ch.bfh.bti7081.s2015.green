@@ -1,33 +1,41 @@
 package ch.bfh.bti7081.s2015.green.DoctorsRegistry.views;
 
+import java.io.Serializable;
+
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.helpers.LoginHandler;
 
 import com.vaadin.data.validator.AbstractValidator;
 import com.vaadin.data.validator.EmailValidator;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
-import com.vaadin.server.Resource;
+import com.vaadin.server.Page;
 import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.CustomComponent;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.Reindeer;
 
 public class LoginView extends CustomComponent implements View, Button.ClickListener {
+	private static final long serialVersionUID = 6684620759396715740L;
 
 	public static final String NAME = "login";
+	private TextField user;
+	private PasswordField password;
+	private Button loginButton;
+	private LoginListener loginListener;
 	
-	private final TextField user;
+	public LoginView(LoginListener loginListener) {
+		this.loginListener = loginListener;
+		
+		buildUi();
+	}
 	
-	private final PasswordField password;
-	
-	private final Button loginButton;
-	
-	public LoginView() {
+	private void buildUi() {
 		setSizeFull();
 		
 		// Create the user input field
@@ -52,7 +60,7 @@ public class LoginView extends CustomComponent implements View, Button.ClickList
 		
 		// Add both to a panel
 		VerticalLayout fields = new VerticalLayout(user, password, loginButton);
-		fields.setCaption("Please login to access the application. (test@test.com/passw0rd)");
+		//fields.setCaption("Please login to access the application. (test@test.com/passw0rd)");
 		fields.setSpacing(true);
 		fields.setMargin(new MarginInfo(true, true, true, false));
 		fields.setSizeUndefined();
@@ -64,7 +72,7 @@ public class LoginView extends CustomComponent implements View, Button.ClickList
 		viewLayout.setStyleName(Reindeer.LAYOUT_BLUE);
 		setCompositionRoot(viewLayout);
 	}
-	
+
 	@Override
 	public void enter(ViewChangeEvent event) {
 		// focus the username field when user arrives to the login view
@@ -82,11 +90,10 @@ public class LoginView extends CustomComponent implements View, Button.ClickList
 		@Override
 		protected boolean isValidValue(String value) {
 		    //
-		    // Password must be at least 8 characters long and contain at least
+		    // Password must be at least 6 characters long and contain at least
 		    // one number
 		    //
-		    if (value != null
-		            && (value.length() < 8 || !value.matches(".*\\d.*"))) {
+		    if (value != null && (value.length() < 6 || !value.matches(".*\\d.*"))) {
 		        return false;
 		    }
 		    return true;
@@ -121,21 +128,27 @@ public class LoginView extends CustomComponent implements View, Button.ClickList
 		        && password.equals("passw0rd");
 		
 		if (isValid) {
-		
-		    // Store the current user in the service session
 		    getSession().setAttribute("user", username);
-		
-		    // Navigate to main view
-		    LoginHandler.setIsLoggedIn(true);
-		    LoginHandler.toMain();
-		    
-		
+		    this.loginListener.loginSuccessful();
 		} else {
-		
 		    // Wrong password clear the password field and refocuses it
+			showNotification(new Notification("Login failed",
+                    "Please check your username and password and try again.",
+                    Notification.Type.HUMANIZED_MESSAGE));
+			
 		    this.password.setValue(null);
 		    this.password.focus();
-		
 		}
 	}
+	
+	private void showNotification(Notification notification) {
+        // keep the notification visible a little while after moving the
+        // mouse, or until clicked
+        notification.setDelayMsec(2000);
+        notification.show(Page.getCurrent());
+    }
+	
+	public interface LoginListener extends Serializable {
+        void loginSuccessful();
+    }
 }

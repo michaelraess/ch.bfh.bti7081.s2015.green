@@ -1,10 +1,12 @@
 package ch.bfh.bti7081.s2015.green.DoctorsRegistry;
 
+import javax.servlet.SessionTrackingMode;
 import javax.servlet.annotation.WebServlet;
 
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.AppointmentsView;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.CasesView;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.DashboardView;
+import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.LoginView;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.Menu;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.PatientsView;
 
@@ -24,10 +26,6 @@ import com.vaadin.ui.UI;
 @Theme("drtheme")
 @Widgetset("ch.bfh.bti7081.s2015.green.DoctorsRegistry.DrAppWidgetset")
 public class GeneralController extends UI {
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 5390254949054698917L;
 	
 	//Variables
@@ -41,11 +39,26 @@ public class GeneralController extends UI {
 		this.getPage().setTitle("Doctors Registry");
 		//Prepare the template page
 		createMainView();
-		
-		
 	}
 	
 	public void createMainView() {
+		//Login Checker
+        String currentUser = (String) getSession().getAttribute("user");
+        if(currentUser == null) {
+        	this.setContent(new LoginView(new LoginView.LoginListener() {
+				private static final long serialVersionUID = -6472665895715933073L;
+				
+				@Override
+				public void loginSuccessful() {
+					showMainView();
+				}
+			}));
+        } else {
+        	showMainView();
+        }
+	}
+	
+	private void showMainView() {
 		//Create Main Container for Views
 		HorizontalLayout mainVl = new HorizontalLayout();
 		mainVl.setSizeFull();
@@ -54,74 +67,30 @@ public class GeneralController extends UI {
 		CssLayout viewContainer = new CssLayout();
         viewContainer.addStyleName("valo-content");
         viewContainer.setSizeFull();
-		
+        
 		//Init Navigator
 		final Navigator navigator = new Navigator(this, viewContainer);
 		
 		//Menu
 		menu = new Menu(navigator);
-		menu.addView(new DashboardView(), "", DashboardView.NAME, FontAwesome.EDIT);
+		menu.addView(new DashboardView(), "", DashboardView.NAME, FontAwesome.DASHBOARD);
 		menu.addView(new CasesView(), CasesView.NAME, CasesView.NAME, FontAwesome.EDIT);
-		menu.addView(new PatientsView(), PatientsView.NAME, PatientsView.NAME, FontAwesome.EDIT);
-		menu.addView(new AppointmentsView(), AppointmentsView.NAME, AppointmentsView.NAME, FontAwesome.EDIT);
+		menu.addView(new PatientsView(), PatientsView.NAME, PatientsView.NAME, FontAwesome.MALE);
+		menu.addView(new AppointmentsView(), AppointmentsView.NAME, AppointmentsView.NAME, FontAwesome.CALENDAR);
 		
 		navigator.addViewChangeListener(viewChangeListener);
 		
 		mainVl.addComponent(menu);
 		mainVl.addComponent(viewContainer);
 		mainVl.setExpandRatio(viewContainer, 1);
-		/*
-		
-		
-		this.setContent(mainVl);
-		
-		//Put logo
-		Image logo = new Image();
-		logo.setAlternateText("Logo");
-		logo.setSource(new ThemeResource("images/logo_75_60.jpg"));
-		logo.setWidth(50f, Unit.PIXELS);
-		mainVl.addComponent(logo);
-		mainVl.addComponent(new Label("<hr/>", ContentMode.HTML));
-		
-		TabSheet tabsheet = new TabSheet();
-		mainVl.addComponent(tabsheet);
-		
-		// Dashboard Tab
-		DashboardView dashboardTab = new DashboardView();
-		tabsheet.addTab(dashboardTab, "Dashboard", new ThemeResource("images/dashboard_icon_30.png"));
-		
-		//Cases
-		CasesView cases = new CasesView();
-		tabsheet.addTab(cases, "Fälle", new ThemeResource("images/case_icon_30.jpg"));
-		
-		//Appointments
-		AppointmentsView appointments = new AppointmentsView();
-		tabsheet.addTab(appointments, "Termine", new ThemeResource("images/appointments_icon_30.jpg"));
-		
-		//Patients
-		PatientsView patients = new PatientsView();
-		tabsheet.addTab(patients, "Patienten", new ThemeResource("images/patient_icon_30.png"));
-		
-		//Footer
-		mainVl.addComponent(new Label("<hr/>", ContentMode.HTML));
-		Label copyright = new Label("2015 \u00a9 SoED: Team Green");
-		copyright.setSizeUndefined();
-		mainVl.addComponent(copyright);
-		mainVl.setComponentAlignment(copyright, Alignment.TOP_CENTER);
-		
-		//GraphDatabaseService graphDb = new RestGraphDatabase(DATABASE_ENDPOINT, DATABASE_USERNAME, DATABASE_PASSWORD);
-		*/
-		/*Node n = graphDb.createNode();
-		n.setProperty("Email", "sergii.bilousov@gmail.com");*/
-		
-		//UserModel um = new UserModel(DATABASE_ENDPOINT, DATABASE_USERNAME, DATABASE_PASSWORD);
 	}
-	
+
 	// notify the view menu about view changes so that it can display which view
     // is currently active
     ViewChangeListener viewChangeListener = new ViewChangeListener() {
+		private static final long serialVersionUID = -1303877173524139079L;
 
-        @Override
+		@Override
         public boolean beforeViewChange(ViewChangeEvent event) {
             return true;
         }
@@ -141,6 +110,7 @@ public class GeneralController extends UI {
 	@WebServlet(urlPatterns = "/*", name = "GeneralUIServlet", asyncSupported = true)
     @VaadinServletConfiguration(ui = GeneralController.class, productionMode = false)
     public static class GeneralUIServlet extends VaadinServlet {
+		private static final long serialVersionUID = -2646649631121528587L;
     }
 
 }
