@@ -28,7 +28,7 @@ import com.vaadin.ui.UI;
 @Widgetset("ch.bfh.bti7081.s2015.green.DoctorsRegistry.DrAppWidgetset")
 public class GeneralController extends UI {
 	private static final long serialVersionUID = 5390254949054698917L;
-	
+	private static final boolean isDebug = true;
 	//Variables
 	Menu menu = null;
 
@@ -45,7 +45,9 @@ public class GeneralController extends UI {
 	public void createMainView() {
 		//Login Checker
         String currentUser = (String) getSession().getAttribute("user");
-        if(currentUser == null) {
+        if(currentUser != null || isDebug) {
+        	showMainView();
+        } else {
         	this.setContent(new LoginView(new LoginView.LoginListener() {
 				private static final long serialVersionUID = -6472665895715933073L;
 				
@@ -54,8 +56,6 @@ public class GeneralController extends UI {
 					Page.getCurrent().reload();
 				}
 			}));
-        } else {
-        	showMainView();
         }
 	}
 	
