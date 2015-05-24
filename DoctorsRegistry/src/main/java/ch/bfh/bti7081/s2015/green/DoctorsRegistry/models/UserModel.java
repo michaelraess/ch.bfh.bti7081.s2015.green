@@ -41,5 +41,12 @@ public class UserModel extends DefaultModel {
 		String queryString = String.format("CREATE (n:%s { id : %d, email : '%s', password : '%s' })", LABEL, nextId, email, password);
 		this.getQueryEngine().query(queryString, null).to(Node.class);
 	}
+	
+	public boolean isLoginCorrect(String email, String password) {
+		String queryString = String.format("MATCH (n:%s) WHERE n.email='%s' AND n.password='%s' RETURN COUNT(n)", LABEL, email, password);
+		int crNode = this.getQueryEngine().query(queryString, null).to(Integer.class).single();
+		
+		return crNode == 1 ? true : false;
+	}
 
 }

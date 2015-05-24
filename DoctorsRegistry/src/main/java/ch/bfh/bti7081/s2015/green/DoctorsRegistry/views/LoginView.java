@@ -2,7 +2,8 @@ package ch.bfh.bti7081.s2015.green.DoctorsRegistry.views;
 
 import java.io.Serializable;
 
-import ch.bfh.bti7081.s2015.green.DoctorsRegistry.helpers.LoginHandler;
+import ch.bfh.bti7081.s2015.green.DoctorsRegistry.models.DefaultModel;
+import ch.bfh.bti7081.s2015.green.DoctorsRegistry.models.UserModel;
 
 import com.vaadin.data.validator.AbstractValidator;
 import com.vaadin.data.validator.EmailValidator;
@@ -29,6 +30,9 @@ public class LoginView extends CustomComponent implements View, Button.ClickList
 	private Button loginButton;
 	private LoginListener loginListener;
 	
+	//Model
+	UserModel um = null;
+	
 	public LoginView(LoginListener loginListener) {
 		this.loginListener = loginListener;
 		
@@ -44,7 +48,7 @@ public class LoginView extends CustomComponent implements View, Button.ClickList
 		user.setRequired(true);
 		user.setInputPrompt("Your username (eg. joe@email.com)");
 		user.addValidator(new EmailValidator(
-		        "Username must be an email address"));
+		        "Username must be a valid email address"));
 		user.setInvalidAllowed(false);
 		
 		// Create the password input field
@@ -71,6 +75,11 @@ public class LoginView extends CustomComponent implements View, Button.ClickList
 		viewLayout.setComponentAlignment(fields, Alignment.MIDDLE_CENTER);
 		viewLayout.setStyleName(Reindeer.LAYOUT_BLUE);
 		setCompositionRoot(viewLayout);
+		
+		//Connect to DB
+		um = new UserModel(DefaultModel.DATABASE_ENDPOINT, 
+				DefaultModel.DATABASE_USERNAME,
+				DefaultModel.DATABASE_PASSWORD);
 	}
 
 	@Override
@@ -80,9 +89,9 @@ public class LoginView extends CustomComponent implements View, Button.ClickList
 	}
 	
 	// Validator for validating the passwords
-	private static final class PasswordValidator extends
-	    AbstractValidator<String> {
-	
+	private static final class PasswordValidator extends AbstractValidator<String> {
+		private static final long serialVersionUID = 8684687388246483015L;
+
 		public PasswordValidator() {
 		    super("The password provided is not valid");
 		}
@@ -124,8 +133,15 @@ public class LoginView extends CustomComponent implements View, Button.ClickList
 		// Validate username and password with database here. For examples sake
 		// I use a dummy username and password.
 		//
-		boolean isValid = username.equals("test@test.com")
-		        && password.equals("passw0rd");
+		/*boolean isValid = username.equals("test@test.com")
+		        && password.equals("passw0rd");*/
+		
+		boolean isValid = false;
+		try {
+			isValid = um.isLoginCorrect(username, password);
+		} catch (Exception e) {
+			
+		}
 		
 		if (isValid) {
 		    getSession().setAttribute("user", username);

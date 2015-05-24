@@ -16,6 +16,7 @@ import com.vaadin.annotations.Widgetset;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.server.FontAwesome;
+import com.vaadin.server.Page;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.server.VaadinSession;
@@ -50,7 +51,7 @@ public class GeneralController extends UI {
 				
 				@Override
 				public void loginSuccessful() {
-					showMainView();
+					Page.getCurrent().reload();
 				}
 			}));
         } else {
@@ -101,11 +102,6 @@ public class GeneralController extends UI {
         }
 
     };
-	
-    public static final String DATABASE_ENDPOINT = "http://178.62.254.192:7474/db/data";
-    public static final String DATABASE_USERNAME = "neo4j";
-    public static final String DATABASE_PASSWORD = "qwerty1";
- 
 	
 	@WebServlet(urlPatterns = "/*", name = "GeneralUIServlet", asyncSupported = true)
     @VaadinServletConfiguration(ui = GeneralController.class, productionMode = false)

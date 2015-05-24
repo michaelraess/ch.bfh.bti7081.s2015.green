@@ -7,6 +7,10 @@ public class DefaultModel extends RestGraphDatabase {
 	
 	private final RestCypherQueryEngine cypherQueryEngine;
 	
+	public static final String DATABASE_ENDPOINT = "http://178.62.254.192:7474/db/data";
+    public static final String DATABASE_USERNAME = "neo4j";
+    public static final String DATABASE_PASSWORD = "qwerty1";
+	
 	public DefaultModel(String uri, String user, String password) {
 		super(uri, user, password);
 		cypherQueryEngine = new RestCypherQueryEngine(this.getRestAPI());
