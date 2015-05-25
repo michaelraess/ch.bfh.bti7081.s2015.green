@@ -1,6 +1,5 @@
 package ch.bfh.bti7081.s2015.green.DoctorsRegistry;
 
-import javax.servlet.SessionTrackingMode;
 import javax.servlet.annotation.WebServlet;
 
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.AppointmentsView;
