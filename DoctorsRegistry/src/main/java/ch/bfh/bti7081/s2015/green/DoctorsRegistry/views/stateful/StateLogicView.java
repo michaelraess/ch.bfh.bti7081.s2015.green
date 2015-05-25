@@ -9,22 +9,20 @@ public class StateLogicView extends VerticalLayout implements View {
 	public static final String NAME = "New Case";
 	
 	public final StateContext sc = new StateContext();
-	public VerticalLayout vlMain = new VerticalLayout();
+	public VerticalLayout vlMain = null;
 	
 	public StateLogicView() {
-		//TODO Breadcrumbs
-		
-		//Replaceable content
-		vlMain.setWidth("100%");
-		this.addComponent(vlMain);
-		
-		sc.invokeView(vlMain);
-		
 	}
 
 	@Override
 	public void enter(ViewChangeEvent event) {
+		vlMain = new VerticalLayout();
 		
+		vlMain.setWidth("100%");
+		this.addComponent(vlMain);
+		
+		sc.setState(new CreatePatientView());
+		sc.invokeView(vlMain);
 	}
 
 }

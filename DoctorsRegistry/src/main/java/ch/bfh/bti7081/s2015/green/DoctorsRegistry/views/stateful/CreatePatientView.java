@@ -62,7 +62,7 @@ public class CreatePatientView extends VerticalLayout implements View, DRStates 
 			}
 		});
 		
-		Button btnNewAppointment = new Button("New Appointment");
+		Button btnNewAppointment = new Button("Create Next Appointment");
 		btnNewAppointment.setId("btnNewAppointment");
 		buttonPanel.addComponent(btnNewAppointment);
 		buttonPanel.setComponentAlignment(btnNewAppointment, Alignment.MIDDLE_LEFT);
