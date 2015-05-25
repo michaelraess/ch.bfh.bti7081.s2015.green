@@ -147,8 +147,12 @@ public class Menu extends CssLayout {
 
             @Override
             public void buttonClick(ClickEvent event) {
+            	if(!name.equals("")) {
+            		Page.getCurrent().setTitle(name + " | Doctor's Registry");
+            	} else {
+            		Page.getCurrent().setTitle("Doctor's Registry");
+            	}
                 navigator.navigateTo(name);
-
             }
         });
         button.setPrimaryStyleName(ValoTheme.MENU_ITEM);
