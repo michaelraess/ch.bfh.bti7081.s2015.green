@@ -24,11 +24,15 @@ public class CasesView extends VerticalLayout implements View {
 		
 		CasePlaceholder lcpHeader = new CasePlaceholder();
 		this.addComponent(lcpHeader);
+		this.setComponentAlignment(lcpHeader, Alignment.MIDDLE_CENTER);
 		
 		for(int i=0; i<4; i++) {
-			CasePlaceholder lcp = new CasePlaceholder("12.05.2015 08:00", "Melanie Rindiger", "f", "69", "0123456789");
+			CasePlaceholder lcp = new CasePlaceholder("Case " + i, "Melanie Rindiger", "Dr. Henry");
 			this.addComponent(lcp);
+			this.setComponentAlignment(lcp, Alignment.MIDDLE_CENTER);
 		}
+		
+		//Form for adding new case
 		
 		Button btnAddCase = new Button();
 		btnAddCase.setCaption("Hinzufügen");
