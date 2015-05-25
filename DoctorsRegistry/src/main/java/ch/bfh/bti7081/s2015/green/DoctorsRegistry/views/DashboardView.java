@@ -1,8 +1,13 @@
 package ch.bfh.bti7081.s2015.green.DoctorsRegistry.views;
 
+import java.util.ArrayList;
+
+import ch.bfh.bti7081.s2015.green.DoctorsRegistry.entity.Appointment;
+import ch.bfh.bti7081.s2015.green.DoctorsRegistry.helpers.DateTimeConv;
+import ch.bfh.bti7081.s2015.green.DoctorsRegistry.models.AppointmentModel;
+
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
-import com.vaadin.ui.Alignment;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
@@ -22,9 +27,21 @@ public class DashboardView extends HorizontalLayout implements View {
 		nt.addStyleName(ValoTheme.LABEL_H2);
 		leftLayout.addComponent(nt);
 		
-		for(int i=0; i<3; i++) {
-			AppointmentPlaceholder ap = new AppointmentPlaceholder("12.05.2015 08:00", "Melanie Rindiger", "f", "69", "0123456789");
-			leftLayout.addComponent(ap);
+		try {
+			AppointmentModel am = new AppointmentModel();
+			ArrayList<Appointment> alAppmnt = am.getNextAppointments(10);
+			
+			if(alAppmnt.size() == 0) {
+				leftLayout.addComponent(new Label("No Meetings Yet"));
+			}
+			
+			for(Appointment a : alAppmnt) {
+				String dateTime = DateTimeConv.convertTime(a.getDateTime(), "dd.MM.yyyy HH:mm:ss");
+				AppointmentPlaceholder ap = new AppointmentPlaceholder(dateTime, "Melanie Rindiger", "f", "69", "0123456789");
+				leftLayout.addComponent(ap);
+			}
+		} catch (Exception e) {
+			leftLayout.addComponent(new Label("No Meetings Yet"));
 		}
 		
 		this.addComponent(leftLayout);

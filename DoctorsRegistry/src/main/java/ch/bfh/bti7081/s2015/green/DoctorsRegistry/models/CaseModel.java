@@ -6,8 +6,8 @@ public class CaseModel extends DefaultModel {
 	
 	private final String LABEL = "Case";
 
-	public CaseModel(String uri, String user, String password) {
-		super(uri, user, password);
+	public CaseModel() {
+		super();
 	}
 
 	public void addCase() {

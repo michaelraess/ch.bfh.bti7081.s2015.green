@@ -10,8 +10,8 @@ public class UserModel extends DefaultModel {
 	
 	private final String LABEL = "User";
 
-	public UserModel(String uri, String user, String password) {
-		super(uri, user, password);
+	public UserModel() {
+		super();
 	}
 	
 	public ArrayList<User> getAllUsers(int limit) {

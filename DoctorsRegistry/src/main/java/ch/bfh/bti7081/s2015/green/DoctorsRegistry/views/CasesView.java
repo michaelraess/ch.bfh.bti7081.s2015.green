@@ -32,6 +32,8 @@ public class CasesView extends VerticalLayout implements View {
 		
 		Button btnAddCase = new Button();
 		btnAddCase.setCaption("Hinzufügen");
+		btnAddCase.addStyleName(ValoTheme.BUTTON_TINY);
+		btnAddCase.addStyleName(ValoTheme.BUTTON_FRIENDLY);
 		btnAddCase.addClickListener(new Button.ClickListener() {
 			private static final long serialVersionUID = 7067988160091294112L;
 

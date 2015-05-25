@@ -1,18 +1,16 @@
 package ch.bfh.bti7081.s2015.green.DoctorsRegistry.entity;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-
 public class Appointment {
 	
 	private int id = -1;
-	private String dateTime = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(Calendar.getInstance().getTime());
+	private int caseId = -1;
+	private long dateTime = System.currentTimeMillis();
 
-	public String getDateTime() {
+	public long getDateTime() {
 		return dateTime;
 	}
 
-	public void setDateTime(String dateTime) {
+	public void setDateTime(long dateTime) {
 		this.dateTime = dateTime;
 	}
 
@@ -22,6 +20,14 @@ public class Appointment {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public int getCaseId() {
+		return caseId;
+	}
+
+	public void setCaseId(int caseId) {
+		this.caseId = caseId;
 	};
 	
 }

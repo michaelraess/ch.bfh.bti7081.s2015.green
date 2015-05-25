@@ -77,9 +77,7 @@ public class LoginView extends CustomComponent implements View, Button.ClickList
 		setCompositionRoot(viewLayout);
 		
 		//Connect to DB
-		um = new UserModel(DefaultModel.DATABASE_ENDPOINT, 
-				DefaultModel.DATABASE_USERNAME,
-				DefaultModel.DATABASE_PASSWORD);
+		um = new UserModel();
 	}
 
 	@Override
