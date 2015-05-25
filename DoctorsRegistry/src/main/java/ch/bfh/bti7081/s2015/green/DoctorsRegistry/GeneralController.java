@@ -2,11 +2,12 @@ package ch.bfh.bti7081.s2015.green.DoctorsRegistry;
 
 import javax.servlet.annotation.WebServlet;
 
+import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.AdminView;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.DashboardView;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.DashboardView.ControlActions;
-import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.stateful.StateLogicView;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.LoginView;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.Menu;
+import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.stateful.StateLogicView;
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
@@ -38,7 +39,9 @@ public class GeneralController extends UI {
 		//Change Page title
 		this.getPage().setTitle("Doctors Registry");
 		//Prepare the template page
+		
 		createMainView();
+		
 	}
 	
 	public void createMainView() {
@@ -74,6 +77,7 @@ public class GeneralController extends UI {
 		//Views
 		DashboardView dv = new DashboardView();
 		StateLogicView cpv = new StateLogicView();
+		AdminView av = new AdminView();
 		
 		//Menu
 		menu = new Menu(navigator);
@@ -82,6 +86,8 @@ public class GeneralController extends UI {
 		//menu.addView(new CasesView(), CasesView.NAME, CasesView.NAME, FontAwesome.EDIT);
 		//
 		//menu.addView(new AppointmentsView(), AppointmentsView.NAME, AppointmentsView.NAME, FontAwesome.CALENDAR);
+		
+		menu.addView(av, AdminView.NAME, AdminView.NAME, FontAwesome.COGS);
 		
 		//
 		navigator.addViewChangeListener(viewChangeListener);
