@@ -2,9 +2,9 @@ package ch.bfh.bti7081.s2015.green.DoctorsRegistry;
 
 import javax.servlet.annotation.WebServlet;
 
-import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.AppointmentsView;
-import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.CasesView;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.DashboardView;
+import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.DashboardView.ControlActions;
+import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.stateful.StateLogicView;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.LoginView;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.Menu;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.PatientDataView;
@@ -20,6 +20,7 @@ import com.vaadin.server.Page;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.server.VaadinSession;
+import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.UI;
@@ -72,17 +73,31 @@ public class GeneralController extends UI {
 		//Init Navigator
 		final Navigator navigator = new Navigator(this, viewContainer);
 		
+		//Views
+		DashboardView dv = new DashboardView();
+		StateLogicView cpv = new StateLogicView();
+		
 		//Menu
 		menu = new Menu(navigator);
-		menu.addView(new DashboardView(), "", DashboardView.NAME, FontAwesome.DASHBOARD);
-		menu.addView(new CasesView(), CasesView.NAME, CasesView.NAME, FontAwesome.EDIT);
+		menu.addView(dv, "", DashboardView.NAME, FontAwesome.DASHBOARD);
+		menu.addView(cpv, StateLogicView.NAME, StateLogicView.NAME, FontAwesome.MALE);
+		//menu.addView(new CasesView(), CasesView.NAME, CasesView.NAME, FontAwesome.EDIT);
 		menu.addView(new PatientsView(), PatientsView.NAME, PatientsView.NAME, FontAwesome.MALE);
-		menu.addView(new AppointmentsView(), AppointmentsView.NAME, AppointmentsView.NAME, FontAwesome.CALENDAR);
+		//menu.addView(new AppointmentsView(), AppointmentsView.NAME, AppointmentsView.NAME, FontAwesome.CALENDAR);
 		
 		navigator.addView(PatientsView.NAME + "/1", new PatientDataView());
 		
 		navigator.addViewChangeListener(viewChangeListener);
 		
+		//Assign Methods
+		dv.setControlActions(new ControlActions() {
+			@Override
+			public void createNewCase(ClickEvent event) {
+				navigator.navigateTo(StateLogicView.NAME);
+			}
+		});
+		
+		//Adding to the main Pane
 		mainVl.addComponent(menu);
 		mainVl.addComponent(viewContainer);
 		mainVl.setExpandRatio(viewContainer, 1);

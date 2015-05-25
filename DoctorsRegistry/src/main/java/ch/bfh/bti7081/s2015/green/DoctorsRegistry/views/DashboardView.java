@@ -12,11 +12,19 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.themes.ValoTheme;
 
 public class DashboardView extends VerticalLayout implements View {
 	private static final long serialVersionUID = -8781446538751439955L;
 	public static final String NAME = "Dashboard";
+	private ControlActions controlActions = new ControlActions() {
+		
+		@Override
+		public void createNewCase(ClickEvent event) {
+			
+		}
+	};
 
 	public DashboardView() {
 		//this.setSizeFull();
@@ -89,12 +97,33 @@ public class DashboardView extends VerticalLayout implements View {
 		btnCreate.setCaption("New Case");
 		btnCreate.addStyleName(ValoTheme.BUTTON_FRIENDLY);
 		
+		btnCreate.addClickListener(new Button.ClickListener() {
+			private static final long serialVersionUID = 8780929602616467769L;
+
+			@Override
+			public void buttonClick(ClickEvent event) {
+				controlActions.createNewCase(event);
+			}
+		});
+		
 		hl.addComponent(btnCreate);
+	}
+	
+	public interface ControlActions {
+		void createNewCase(ClickEvent event);
 	}
 
 	@Override
 	public void enter(ViewChangeEvent event) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public ControlActions getControlActions() {
+		return controlActions;
+	}
+
+	public void setControlActions(ControlActions controlActions) {
+		this.controlActions = controlActions;
 	}
 }
