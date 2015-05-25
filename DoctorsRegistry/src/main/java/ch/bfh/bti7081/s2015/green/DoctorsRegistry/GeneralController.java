@@ -7,6 +7,8 @@ import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.DashboardView.ControlAct
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.stateful.StateLogicView;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.LoginView;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.Menu;
+import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.PatientDataView;
+import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.PatientsView;
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
@@ -80,10 +82,11 @@ public class GeneralController extends UI {
 		menu.addView(dv, "", DashboardView.NAME, FontAwesome.DASHBOARD);
 		menu.addView(cpv, StateLogicView.NAME, StateLogicView.NAME, FontAwesome.MALE);
 		//menu.addView(new CasesView(), CasesView.NAME, CasesView.NAME, FontAwesome.EDIT);
-		//
+		menu.addView(new PatientsView(), PatientsView.NAME, PatientsView.NAME, FontAwesome.MALE);
 		//menu.addView(new AppointmentsView(), AppointmentsView.NAME, AppointmentsView.NAME, FontAwesome.CALENDAR);
 		
-		//
+		navigator.addView(PatientsView.NAME + "/1", new PatientDataView());
+		
 		navigator.addViewChangeListener(viewChangeListener);
 		
 		//Assign Methods
