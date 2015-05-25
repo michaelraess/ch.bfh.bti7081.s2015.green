@@ -2,20 +2,21 @@ package ch.bfh.bti7081.s2015.green.DoctorsRegistry.views;
 
 import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.themes.ValoTheme;
 
 public class LastCasePlaceholder extends VerticalLayout {
-
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 5466465250521151036L;
 
 	public LastCasePlaceholder(String datetime, String name, String gender, String age, String phoneNumber) {
-		this.setStyleName("dashboard-placeholder");
-		this.setWidth("50%");
+		this.setStyleName(ValoTheme.PANEL_WELL);
+		this.setWidth("95%");
 		
 		Label line2 = new Label(name + " (" + gender + ") " + age);
 		this.addComponent(line2);
+		
+		Label line4 = new Label("Doktor/in");
+		this.addComponent(line4);
 		
 		Label line1 = new Label(datetime);
 		this.addComponent(line1);
@@ -23,5 +24,4 @@ public class LastCasePlaceholder extends VerticalLayout {
 		Label line3 = new Label(phoneNumber);
 		this.addComponent(line3);
 	}
-	
 }
