@@ -25,12 +25,15 @@ public class MedicationView extends VerticalLayout implements View, DRStates {
 		FormLayout fl = new FormLayout();
 		fl.setWidth("100%");
 		
+		
+		
+		
 		//Buttons
 		HorizontalLayout buttonPanel = new HorizontalLayout();
 		buttonPanel.setWidth("100%");
 		fl.addComponent(buttonPanel);
 		
-		Button btnNewAppointment = new Button("Print Prescription");
+		Button btnNewAppointment = new Button("Create Next Appointment");
 		btnNewAppointment.setId("btnNewAppointment");
 		buttonPanel.addComponent(btnNewAppointment);
 		buttonPanel.setComponentAlignment(btnNewAppointment, Alignment.MIDDLE_LEFT);
@@ -43,6 +46,23 @@ public class MedicationView extends VerticalLayout implements View, DRStates {
 				context.invokeView(v);
 			}
 		});
+		
+		Button btnPrintPrescription = new Button("Print Prescription");
+		btnPrintPrescription.setId("btnPrintPrescription");
+		btnPrintPrescription.addStyleName(ValoTheme.BUTTON_FRIENDLY);
+		buttonPanel.addComponent(btnPrintPrescription);
+		buttonPanel.setComponentAlignment(btnPrintPrescription, Alignment.MIDDLE_RIGHT);
+		btnPrintPrescription.addClickListener(new Button.ClickListener() {
+			private static final long serialVersionUID = 6815336151930979397L;
+
+			@Override
+			public void buttonClick(ClickEvent event) {
+				context.setState(new PrescriptionView());
+				context.invokeView(v);
+			}
+		});
+		
+		v.addComponent(fl);
 	}
 
 	@Override
