@@ -11,7 +11,9 @@ public class CaseModel extends DefaultModel {
 	}
 
 	public void addCase() {
-		String queryString = String.format("CREATE (n:%s)", LABEL);
+		int nextId = this.getLastIdFor(LABEL) + 1;
+		
+		String queryString = String.format("CREATE (n:%s { id : %d })", LABEL, nextId);
 		this.getQueryEngine().query(queryString, null).to(Node.class);
 	}
 }

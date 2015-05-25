@@ -74,9 +74,9 @@ public class GeneralController extends UI {
 		//Menu
 		menu = new Menu(navigator);
 		menu.addView(new DashboardView(), "", DashboardView.NAME, FontAwesome.DASHBOARD);
-		menu.addView(new CasesView(), CasesView.NAME, CasesView.NAME, FontAwesome.EDIT);
-		menu.addView(new PatientsView(), PatientsView.NAME, PatientsView.NAME, FontAwesome.MALE);
-		menu.addView(new AppointmentsView(), AppointmentsView.NAME, AppointmentsView.NAME, FontAwesome.CALENDAR);
+		//menu.addView(new CasesView(), CasesView.NAME, CasesView.NAME, FontAwesome.EDIT);
+		//menu.addView(new PatientsView(), PatientsView.NAME, PatientsView.NAME, FontAwesome.MALE);
+		//menu.addView(new AppointmentsView(), AppointmentsView.NAME, AppointmentsView.NAME, FontAwesome.CALENDAR);
 		
 		navigator.addViewChangeListener(viewChangeListener);
 		
