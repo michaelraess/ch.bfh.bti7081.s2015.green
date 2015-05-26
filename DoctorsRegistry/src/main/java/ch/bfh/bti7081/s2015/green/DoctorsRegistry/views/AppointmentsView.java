@@ -33,14 +33,14 @@ public class AppointmentsView extends VerticalLayout implements View {
 		this.setSizeUndefined();
 		this.setStyleName("dr-wrapper");
 		
-		Label title = new Label("Termin Übersicht");
+		Label title = new Label("Appointments Overview");
 		title.setSizeUndefined();
 		title.addStyleName(ValoTheme.LABEL_H2);
 		title.addStyleName("dr-title");
 		this.addComponent(title);
 		
 		Button btnCreate = new Button();
-		btnCreate.setCaption("Termin hinzufügen");
+		btnCreate.setCaption("Add Appointment");
 		btnCreate.addStyleName(ValoTheme.BUTTON_FRIENDLY + " " + ValoTheme.BUTTON_SMALL + " dr-button-add");
 		btnCreate.addClickListener(new ClickListener() {
 		    public void buttonClick(ClickEvent event) {
@@ -53,9 +53,9 @@ public class AppointmentsView extends VerticalLayout implements View {
 		
 		this.addComponent(btnCreate);
 		
-		addRandomAppointments("Heute", 5);
-		addRandomAppointments("Morgen", 2);
-		addRandomAppointments("28. Mai", 3);
+		addRandomAppointments("Today", 5);
+		addRandomAppointments("Tomorrow", 2);
+		addRandomAppointments("28. May", 3);
 
 	}
 	
@@ -68,13 +68,14 @@ public class AppointmentsView extends VerticalLayout implements View {
 		
 		Table table = new Table();
 		// Define two columns for the built-in container
-		table.addContainerProperty("Zeit", String.class, null);
+		table.addContainerProperty("Time", String.class, null);
 		table.addContainerProperty("Patient",  String.class, null);
-		table.addContainerProperty("Betreff",  String.class, null);
-		table.addContainerProperty("Optionen",  Button.class, null);
+		table.addContainerProperty("Description",  String.class, null);
+		table.addContainerProperty("Options",  Button.class, null);
 		
 		for (int i = 0; i < count; i++) {
-			final Button edit = new Button("Edit");
+			final Button edit = new Button();
+			edit.setIcon(FontAwesome.EDIT);
 			edit.addClickListener(new ClickListener() {
 			    public void buttonClick(ClickEvent event) {
 			        CreateEditModal sub = new CreateEditModal();
@@ -85,7 +86,7 @@ public class AppointmentsView extends VerticalLayout implements View {
 			});
 			
 			// Add a few other rows using shorthand addItem()
-			table.addItem(new Object[]{"08:12", "Melanie", "Psychose und Paranoia", edit}, i);
+			table.addItem(new Object[]{"08:12", "Melanie", "Psychosis", edit}, i);
 
 		}
 		// Show exactly the currently contained rows (items)
@@ -108,7 +109,7 @@ public class AppointmentsView extends VerticalLayout implements View {
 //Define a sub-window by inheritance
 class CreateEditModal extends Window {
 	 public CreateEditModal() {
-	     super("Termin"); // Set window caption
+	     super("Appointment"); // Set window caption
 	     center();
 	
 	     // Some basic content for the window
@@ -128,7 +129,7 @@ class CreateEditModal extends Window {
 		 content.addComponent(select);
 		  
 	     // Date & Time
-	     content.addComponent(getStyledLabel("Datum und Zeit"));
+	     content.addComponent(getStyledLabel("Date & Time"));
 	     InlineDateField date = new InlineDateField();
 	     date.setResolution(Resolution.SECOND);
 	     // Set the date and time to present
@@ -136,7 +137,7 @@ class CreateEditModal extends Window {
 	     content.addComponent(date);
 		  
 	     // Description
-	     content.addComponent(getStyledLabel("Beschreibung"));
+	     content.addComponent(getStyledLabel("Description"));
 	     content.addComponent(new TextField());
 	     
 	     content.setMargin(true);
@@ -146,7 +147,7 @@ class CreateEditModal extends Window {
 	     setClosable(false);
 	
 	     // Trivial logic for closing the sub-window
-	     Button cancel = new Button("Abbrechen");
+	     Button cancel = new Button("Cancel");
 	     cancel.addClickListener(new ClickListener() {
 	         public void buttonClick(ClickEvent event) {
 	             close(); // Close the sub-window
@@ -154,7 +155,7 @@ class CreateEditModal extends Window {
 	     });
 	     content.addComponent(cancel);
 	     
-	     Button ok = new Button("Speichern");
+	     Button ok = new Button("Save");
 	     ok.addClickListener(new ClickListener() {
 	         public void buttonClick(ClickEvent event) {
 	             close(); // Close the sub-window
