@@ -23,6 +23,9 @@ public class UserModel extends DefaultModel {
 		
 		for(Node resUser : resUsers) {
 			User user = new User();
+			if(resUser.hasProperty("id")) {
+				user.setId((int)resUser.getProperty("id"));
+			}
 			if(resUser.hasProperty("email")) {
 				user.setEmail((String)resUser.getProperty("email"));
 			}
@@ -39,6 +42,12 @@ public class UserModel extends DefaultModel {
 		int nextId = this.getLastIdFor(LABEL) + 1;
 		
 		String queryString = String.format("CREATE (n:%s { id : %d, email : '%s', password : '%s' })", LABEL, nextId, email, password);
+		this.getQueryEngine().query(queryString, null).to(Node.class);
+	}
+	
+	public void deleteUser(User user) {
+		
+		String queryString = String.format("MATCH (n:%s) WHERE n.email='%s' AND n.password='%s' \n DELETE n ", LABEL, user.getEmail(), user.getPassword());
 		this.getQueryEngine().query(queryString, null).to(Node.class);
 	}
 	
