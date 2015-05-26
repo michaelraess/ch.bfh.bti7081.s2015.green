@@ -9,6 +9,7 @@ import ch.bfh.bti7081.s2015.green.DoctorsRegistry.models.AppointmentModel;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
@@ -28,6 +29,8 @@ public class DashboardView extends VerticalLayout implements View {
 
 	public DashboardView() {
 		//this.setSizeFull();
+		this.setSizeUndefined();
+		this.setStyleName("dr-wrapper");
 		
 		DSGraphView dsGraph = new DSGraphView();
 		this.addComponent(dsGraph);
@@ -47,7 +50,7 @@ public class DashboardView extends VerticalLayout implements View {
 		//--Left Column
 		VerticalLayout leftLayout = new VerticalLayout();
 		Label nt = new Label("Next Appointments");
-		nt.addStyleName(ValoTheme.LABEL_H2);
+		nt.addStyleName(ValoTheme.LABEL_H3);
 		leftLayout.addComponent(nt);
 		
 		try {
@@ -73,21 +76,26 @@ public class DashboardView extends VerticalLayout implements View {
 		//--Right Column
 		VerticalLayout rightLayout = new VerticalLayout();
 		Label zbf = new Label("Last Cases");
-		zbf.addStyleName(ValoTheme.LABEL_H2);
+		zbf.addStyleName(ValoTheme.LABEL_H3);
 		rightLayout.addComponent(zbf);
 		
+		
+		CssLayout patients = new CssLayout();
+		patients.setSizeUndefined();
+		patients.setStyleName("patients-boxes");
 		for(int i=0; i<4; i++) {
-			LastCasePlaceholder lcp = new LastCasePlaceholder("12.05.2015 08:00", "Melanie Rindiger", "f", "69", "0123456789");
+			LastCasePlaceholder lcp = new LastCasePlaceholder("Melanie Rindiger", "f", "69", "0123456789");
 			rightLayout.addComponent(lcp);
 		}
+		rightLayout.addComponent(patients);
 		
 		hlMain.addComponent(rightLayout);
 		hlMain.setExpandRatio(rightLayout, 5);
 	}
 
 	private void createControlPanel() {
-		Label actionsLabel = new Label("Actions");
-		actionsLabel.addStyleName(ValoTheme.LABEL_H2);
+		Label actionsLabel = new Label("Quick Actions");
+		actionsLabel.addStyleName(ValoTheme.LABEL_H3);
 		this.addComponent(actionsLabel);
 		
 		HorizontalLayout hl = new HorizontalLayout();

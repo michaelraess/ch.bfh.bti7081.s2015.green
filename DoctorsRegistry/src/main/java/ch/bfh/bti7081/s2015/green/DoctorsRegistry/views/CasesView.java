@@ -16,6 +16,9 @@ public class CasesView extends VerticalLayout implements View {
 	public CasesView() {
 		// Adding content
 		//this.setSizeFull();
+		this.setSizeUndefined();
+		this.setStyleName("dr-wrapper");
+		
 		Label zbf = new Label("Fälle");
 		zbf.setStyleName(ValoTheme.LABEL_H2);
 		zbf.setSizeUndefined();
