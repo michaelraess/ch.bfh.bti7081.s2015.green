@@ -3,6 +3,7 @@ package ch.bfh.bti7081.s2015.green.DoctorsRegistry;
 import javax.servlet.annotation.WebServlet;
 
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.AdminView;
+import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.AppointmentsView;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.DashboardView;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.DashboardView.ControlActions;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.LoginView;
@@ -85,9 +86,10 @@ public class GeneralController extends UI {
 		menu = new Menu(navigator);
 		menu.addView(dv, "", DashboardView.NAME, FontAwesome.DASHBOARD);
 		menu.addView(cpv, StateLogicView.NAME, StateLogicView.NAME, FontAwesome.MALE);
+		menu.addView(new AppointmentsView(), AppointmentsView.NAME, AppointmentsView.NAME, FontAwesome.CALENDAR);
 		//menu.addView(new CasesView(), CasesView.NAME, CasesView.NAME, FontAwesome.EDIT);
 		menu.addView(new PatientsView(), PatientsView.NAME, PatientsView.NAME, FontAwesome.MALE);
-		//menu.addView(new AppointmentsView(), AppointmentsView.NAME, AppointmentsView.NAME, FontAwesome.CALENDAR);
+		
 		
 		menu.addView(av, AdminView.NAME, AdminView.NAME, FontAwesome.COGS);
 

@@ -11,6 +11,7 @@ import com.vaadin.event.LayoutEvents.LayoutClickEvent;
 import com.vaadin.event.LayoutEvents.LayoutClickListener;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
+import com.vaadin.server.FontAwesome;
 import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
@@ -22,6 +23,9 @@ import com.vaadin.ui.Form;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.Panel;
+import com.vaadin.ui.RichTextArea;
+import com.vaadin.ui.TabSheet;
+import com.vaadin.ui.TabSheet.SelectedTabChangeEvent;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
@@ -30,19 +34,38 @@ public class PatientDataView extends CssLayout implements View {
 	
 	public static final String NAME = "PatientData";
 	private static final long serialVersionUID = 3085702648286504902L;
+	private TabSheet t;
 
 	@SuppressWarnings("serial")
 	public PatientDataView() {
 		this.setSizeUndefined();
 		this.setStyleName("patients-wrapper");
 		
-		Label title = new Label("Patient Informationen");
+		Label title = new Label("Melanie Rindiger");
 		title.setSizeUndefined();
-		title.addStyleName(ValoTheme.LABEL_H1);
+		title.addStyleName(ValoTheme.LABEL_H2);
 		title.addStyleName("patients-title");
 		this.addComponent(title);
 		
-		Panel pnlContact = new Panel("Melanie Rindiger");
+
+        t = new TabSheet();
+
+        t.setWidth("100%");
+
+        t.addTab(getDatasTab(), "Datas", FontAwesome.EDIT);
+        t.addTab(getCasesTab(), "Cases", FontAwesome.EDIT);
+        t.addTab(getMedicationTab(), "Medication", FontAwesome.EDIT);
+        t.addTab(getBiographyTab(), "Biography", FontAwesome.EDIT);
+        t.addTab(getCaregiversTab(), "Caregivers", FontAwesome.EDIT);
+
+        this.addComponent(t);
+	}
+	
+	private VerticalLayout getDatasTab() {
+		VerticalLayout vl = new VerticalLayout();
+		vl.setMargin(true);
+		
+		Panel pnlContact = new Panel();
 		
 		final Patient dataModel = new Patient();
 		Button peekDataModelState = new Button("Speichern",
@@ -58,16 +81,58 @@ public class PatientDataView extends CssLayout implements View {
         form.setDescription("Please enter valid name and address. Fields marked with * are required. "
                         + "If you try to commit with invalid values, a form error message is displayed. ");
 
-        // Layout the example
-        VerticalLayout pnlContactContent1 = new VerticalLayout();
-        pnlContactContent1.setMargin(true);
-        pnlContactContent1.setSpacing(true);
-        pnlContactContent1.addComponent(form);
-        pnlContactContent1.addComponent(peekDataModelState);
 		
-		pnlContact.setContent(pnlContactContent1);
-		pnlContact.setHeight("600px");
-		this.addComponent(pnlContact);
+		vl.addComponent(form);
+		vl.addComponent(pnlContact);
+		vl.addComponent(peekDataModelState);
+		
+		
+		return vl;
+	}
+
+	private VerticalLayout getCasesTab() {
+		VerticalLayout vl = new VerticalLayout();
+		vl.setMargin(true);
+		
+		RichTextArea editor = new RichTextArea();
+		vl.addComponent(editor);
+		
+		
+		Button btnDrug = new Button("Add Drug");
+        //b.addListener(this); // react to clicks
+        vl.addComponent(btnDrug);
+        
+		Button btnAppointment = new Button("Add Appointment");
+        //b.addListener(this); // react to clicks
+        vl.addComponent(btnAppointment);
+        
+		Button btnSave = new Button("Save");
+        //b.addListener(this); // react to clicks
+        vl.addComponent(btnSave);
+        
+        
+		return vl;
+	}
+	
+	private VerticalLayout getMedicationTab() {
+		VerticalLayout vl = new VerticalLayout();
+		vl.setMargin(true);
+		vl.addComponent(new Label("Medication"));
+		return vl;
+	}
+	
+	private VerticalLayout getBiographyTab() {
+		VerticalLayout vl = new VerticalLayout();
+		vl.setMargin(true);
+		vl.addComponent(new Label("Biography"));
+		return vl;
+	}
+	
+	private VerticalLayout getCaregiversTab() {
+		VerticalLayout vl = new VerticalLayout();
+		vl.setMargin(true);
+		vl.addComponent(new Label("Caregivers"));
+		return vl;
 	}
 
 	@SuppressWarnings({ "deprecation", "serial" })
@@ -123,6 +188,10 @@ public class PatientDataView extends CssLayout implements View {
                         "Postal code must be a five digit number.");
             }
         }
+    }
+
+    public void selectedTabChange(SelectedTabChangeEvent event) {
+        // w/e may save?
     }
 	
 	@Override

@@ -28,6 +28,8 @@ public class AdminView extends VerticalLayout implements View {
 	UserModel um = new UserModel();
 	
 	public AdminView() {
+
+		this.setStyleName("dr-wrapper");
 		this.setSizeFull();
 		
 		Label title = new Label("Graphs");

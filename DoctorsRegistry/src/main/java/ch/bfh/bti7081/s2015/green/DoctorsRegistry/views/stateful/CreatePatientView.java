@@ -25,6 +25,9 @@ public class CreatePatientView extends VerticalLayout implements View, DRStates 
 	
 	@Override
 	public void selectView(final StateContext context, final AbstractOrderedLayout v) {
+		v.setSizeUndefined();
+		v.setStyleName("dr-wrapper");
+		
 		//Replaceable content
 		Label l = new Label("Patient Data");
 		l.addStyleName(ValoTheme.LABEL_H2);
@@ -34,13 +37,13 @@ public class CreatePatientView extends VerticalLayout implements View, DRStates 
 		fl.setWidth("100%");
 		
 		//First name
-		patientFirstName = new TextField("First Name");
+		patientFirstName = new TextField("Firstname");
 		patientFirstName.setRequired(true);
 		patientFirstName.setWidth("50%");
 		fl.addComponent(patientFirstName);
 		
 		//Last name
-		patientLastName = new TextField("Last Name");
+		patientLastName = new TextField("Lastname");
 		patientLastName.setRequired(true);
 		patientLastName.setWidth("50%");
 		fl.addComponent(patientLastName);

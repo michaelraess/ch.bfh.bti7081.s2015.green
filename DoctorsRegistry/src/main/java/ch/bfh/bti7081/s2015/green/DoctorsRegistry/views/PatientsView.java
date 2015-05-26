@@ -22,14 +22,14 @@ public class PatientsView extends CssLayout implements View {
 		this.setSizeUndefined();
 		this.setStyleName("patients-wrapper");
 		
-		Label title = new Label("Patienten Übersicht");
+		Label title = new Label("Patients Overview");
 		title.setSizeUndefined();
 		title.addStyleName(ValoTheme.LABEL_H2);
 		title.addStyleName("patients-title");
 		this.addComponent(title);
 		
 		Button btnCreate = new Button();
-		btnCreate.setCaption("Patient hinzufügen");
+		btnCreate.setCaption("Add Patient");
 		btnCreate.addStyleName(ValoTheme.BUTTON_FRIENDLY + " " + ValoTheme.BUTTON_SMALL + " patients-button-add");
 		this.addComponent(btnCreate);
 		
