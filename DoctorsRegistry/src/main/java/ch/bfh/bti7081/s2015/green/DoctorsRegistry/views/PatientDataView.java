@@ -23,6 +23,7 @@ import com.vaadin.ui.Form;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.Panel;
+import com.vaadin.ui.RichTextArea;
 import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.TabSheet.SelectedTabChangeEvent;
 import com.vaadin.ui.TextField;
@@ -81,7 +82,6 @@ public class PatientDataView extends CssLayout implements View {
                         + "If you try to commit with invalid values, a form error message is displayed. ");
 
 		
-		
 		vl.addComponent(form);
 		vl.addComponent(pnlContact);
 		vl.addComponent(peekDataModelState);
@@ -93,7 +93,24 @@ public class PatientDataView extends CssLayout implements View {
 	private VerticalLayout getCasesTab() {
 		VerticalLayout vl = new VerticalLayout();
 		vl.setMargin(true);
-		vl.addComponent(new Label("Datas"));
+		
+		RichTextArea editor = new RichTextArea();
+		vl.addComponent(editor);
+		
+		
+		Button btnDrug = new Button("Add Drug");
+        //b.addListener(this); // react to clicks
+        vl.addComponent(btnDrug);
+        
+		Button btnAppointment = new Button("Add Appointment");
+        //b.addListener(this); // react to clicks
+        vl.addComponent(btnAppointment);
+        
+		Button btnSave = new Button("Save");
+        //b.addListener(this); // react to clicks
+        vl.addComponent(btnSave);
+        
+        
 		return vl;
 	}
 	
