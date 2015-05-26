@@ -53,20 +53,21 @@
 		font-weight: 900;
 	}
 	
-	.patients-wrapper {
+	.patients-wrapper, .dr-wrapper {
 		position: relative;
 		display: inline-block;
 		margin: 20px;
+		
 	}
 	
-	.patients-title {
+	.patients-title, .dr-title {
 		display: inline-block;
 		width: 100%;
 		font-weight: bold;
 		margin: 0 0 30px 0;
 	}
 	
-	.patients-button-add {
+	.patients-button-add, .dr-button-add {
 		position: absolute;
 		top: 16px;
 		right: 4%;
@@ -85,9 +86,16 @@
 		margin: 0 3% 20px 0;
 	}
 	
-	.patients-button-edit {
+	.patients-button-edit, .dr-button-edit {
 		position: absolute;
 		top: 5px;
 		right: 5px;
 	}
+	
+	.v-table {
+		margin-bottom: 50px; 
+	}
+	.v-csslayout.v-csslayout-valo-content {
+	  overflow-y: scroll;
+	 }
 }
