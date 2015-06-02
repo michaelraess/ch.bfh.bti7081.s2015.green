@@ -216,3 +216,16 @@
  - Präsentation
  - Scrum Meeting (in der Gruppe)
  - Scrum Sprint
+
+# 29.05.2015
+- Wer war anwesend: Michael, Tobias, Sergii, Nalet, Reto
+- Was haben wir gemacht: 
+ - Teammeeting
+ - Scrum Sprint
+
+# 02.06.2015
+- Wer war anwesend: Reto (HW: Sergii, Tobias, Michael, Nalet)
+- Was haben wir gemacht:
+ - Theorie Block
+ - Teammeeting via Hangouts
+ - Scrum Sprint
