@@ -192,8 +192,27 @@
  - Präsentation Task 9
  - Theorie
 
-# 01.05.2015
+# 12.05.2015
 - Wer war anwesend: Reto, Nalet
 - Was haben wir gemacht:
  - Theorie
+ - Scrum Sprint
+
+# 19.05.2015
+- Wer war anwesend: Michael, Tobias, Sergii, Nalet, Reto
+- Was haben wir gemacht:
+ - Scrum Meeting (in der Gruppe)
+ - Scrum Sprint
+
+# 22.05.2015
+- Wer war anwesend: Michael, Tobias, Sergii, Nalet, Reto
+- Was haben wir gemacht:
+ - Scrum Meeting (in der Gruppe)
+ - Scrum Sprint
+
+# 26.05.2015
+- Wer war anwesend: Michael, Tobias, Sergii, Nalet, Reto
+- Was haben wir gemacht:
+ - Präsentation
+ - Scrum Meeting (in der Gruppe)
  - Scrum Sprint
