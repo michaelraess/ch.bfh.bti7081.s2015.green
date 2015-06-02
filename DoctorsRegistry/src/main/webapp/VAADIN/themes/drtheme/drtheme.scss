@@ -53,7 +53,7 @@
 		font-weight: 900;
 	}
 	
-	.patients-wrapper, .dr-wrapper {
+	.patients-wrapper {
 		position: relative;
 		display: inline-block;
 		margin: 2%;
@@ -103,4 +103,19 @@
 	 .v-label-h3 {
 	 	font-size: 22px; 
 	 }
+	 
+	 /*used in Admin Panel*/
+	 
+	.dr-wrapper {
+		position: relative;
+		display: inline-block;
+		margin: 10px;
+		
+	}
+	.dr-adminbutton{
+		margin: 30px;
+	}
+	.dr-window-adminbutton{
+		margin: 10px;
+	}
 }
