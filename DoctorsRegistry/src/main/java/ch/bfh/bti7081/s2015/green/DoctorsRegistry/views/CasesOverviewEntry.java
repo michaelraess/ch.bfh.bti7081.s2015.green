@@ -11,8 +11,9 @@ public class CasesOverviewEntry extends VerticalLayout {
 	private static final long serialVersionUID = 5466465250521151036L;
 
 	public CasesOverviewEntry(String datetime, String patient, String doctor) {
-		this.setStyleName("casesOverviewEntry");
-		this.setWidth("100%");
+		this.setSizeUndefined();
+		this.setStyleName("dr-wrapper casesOverviewEntry");
+		
 		
 		Label line2 = new Label(datetime);
 		this.addComponent(line2);
