@@ -20,6 +20,24 @@ public class Patient {
 	private String generalNotes;
 	private String biography;
 	
+	public Patient() {
+		this.firstname = "";
+		this.lastname = "";
+		this.street = "";
+		this.zip = "";
+		this.place = "";
+		this.phone = "";
+		this.mobile = "";
+		this.email = "";
+		this.height = 0;
+		this.weight = 0;
+		this.bloodType = "";
+		this.allergies = "";
+		this.intolerances = "";
+		this.generalNotes = "";
+		this.biography = "";
+	}
+	
 	public String getFirstname() {
 		return firstname;
 	}
