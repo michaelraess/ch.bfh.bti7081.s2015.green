@@ -8,10 +8,13 @@ import ch.bfh.bti7081.s2015.green.DoctorsRegistry.models.UserModel;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
+import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.TextField;
@@ -30,14 +33,14 @@ public class AdminView extends VerticalLayout implements View {
 	public AdminView() {
 
 		this.setStyleName("dr-wrapper");
-		this.setSizeFull();
 		
-		Label title = new Label("Graphs");
+		Label title = new Label("Admin");
 		
 		title.addStyleName(ValoTheme.LABEL_H2);
 		this.addComponent(title);
 
 		Button newUser = new Button("new User");
+		newUser.addStyleName(ValoTheme.BUTTON_FRIENDLY +" dr-adminbutton");
 		
 		newUser.addListener(new Listener() {
 			
@@ -47,9 +50,10 @@ public class AdminView extends VerticalLayout implements View {
 			}
 		});
 		
-		this.addComponent(newUser);
 		
 		Button deleteUser = new Button("delete User");
+		deleteUser.addStyleName(ValoTheme.BUTTON_DANGER +" dr-adminbutton");
+
 		
 		deleteUser.addListener(new Listener() {
 			
@@ -58,24 +62,32 @@ public class AdminView extends VerticalLayout implements View {
 				if(userTable.getValue() != null) {
 					UI.getCurrent().addWindow(new DeleteUserWindow());
 				}
+				else
+				{
+					Notification.show("Warning", "Please select a user to delete!", Notification.Type.ERROR_MESSAGE);
+				}
 			}
-		});;
-		
-		this.addComponent(deleteUser);
-		
-		
+		});
 
-		
-		userTable.setContainerDataSource(new BeanItemContainer<>(User.class));
-		userTable.setSelectable(true);
-		
 		refreshTable();
-		this.addComponent(userTable);
+		
+		VerticalLayout layout = new VerticalLayout();
+		HorizontalLayout layouthor = new HorizontalLayout();
+		layouthor.addComponent(userTable,0);
+		layout.addComponent(deleteUser,0);
+		layout.addComponent(newUser,0);
+		layouthor.addComponent(layout);
+		this.addComponent(layouthor);
+
 	}
 	
 	void refreshTable() {
 		ArrayList<User> allUser = um.getAllUsers(0);
 		userTable.setContainerDataSource(new BeanItemContainer<>(User.class, allUser));
+		userTable.setVisibleColumns(new Object[] {"id", "email", "password"} );
+		userTable.setColumnHeaders( new String[] {"ID", "eMail", "Password"} );
+		userTable.setPageLength(userTable.size());
+
 	}
 
 
@@ -87,23 +99,23 @@ public class AdminView extends VerticalLayout implements View {
 	
 	class DeleteUserWindow extends Window {
 	    public DeleteUserWindow() {
-	        super("Delete User Window"); // Set window caption
+	        super("Delete User"); // Set window caption
 	        center();
 	        
-	        setHeight("200px");
-	        setWidth("400px");
-
-
-	        center();
 
 	        // Some basic content for the window
 	        VerticalLayout content = new VerticalLayout();
-	        content.addComponent(new Label("Do you want do delete: " + userTable.getValue()));
+	        User usr = (User) userTable.getValue();
+	        Label message = new Label("Do you want do delete: <br /> <br /> id: " +
+	        		usr.getId() + 
+	        		"<br />eMail: "+
+	        		usr.getEmail()+
+	        		"<br /><br />This action can not be undone!");
+	        message.setContentMode(ContentMode.HTML);
+	        content.addComponent(message);
 	        content.setMargin(true);
 	        setContent(content);
 	        
-	        // Disable the close button
-	        setClosable(false);
 
 	        // Trivial logic for closing the sub-window
 	        Button ok = new Button("OK");
@@ -116,51 +128,42 @@ public class AdminView extends VerticalLayout implements View {
 	                
 	            }
 	        });
-	        content.addComponent(ok);
-	        
+	        ok.addStyleName("dr-window-adminbutton");
+
 	        Button cancel = new Button("Cancel");
 	        cancel.addClickListener(new ClickListener() {
 	            public void buttonClick(ClickEvent event) {
 	                close(); // Close the sub-window
 	            }
 	        });
-	        content.addComponent(cancel);
+	        cancel.addStyleName("dr-window-adminbutton");
+
+	        content.addComponent(new HorizontalLayout(ok, cancel));
 	    }
 	}
 	
 	class CreateUserWindow extends Window {
 		
-		
         TextField eMail = new TextField("E-Mail");
         PasswordField password = new PasswordField("Password");
         
 	    public CreateUserWindow() {
-	        super("Create User Window"); // Set window caption
-	        center();
-	        
-	        setHeight("200px");
-	        setWidth("400px");
-
+	        super("Create User"); // Set window caption
 
 	        center();
 
 	        // Some basic content for the window
 	        VerticalLayout content = new VerticalLayout();
 	        
-
-	        
-	        
-	        content.addComponent(new Label("Create new User"));
+	        //content.addComponent(new Label("Create new User"));
 	        content.addComponent(eMail);
 	        content.addComponent(password);
 	        content.setMargin(true);
 	        setContent(content);
 	        
-	        // Disable the close button
-	        setClosable(false);
-
 	        // Trivial logic for closing the sub-window
 	        Button ok = new Button("OK");
+	        ok.addStyleName("dr-window-adminbutton");
 	        ok.addClickListener(new ClickListener() {
 	            public void buttonClick(ClickEvent event) {
 	            	um.addUser(eMail.getValue(), password.getValue());
@@ -168,14 +171,14 @@ public class AdminView extends VerticalLayout implements View {
 	                close(); // Close the sub-window
 	            }
 	        });
-	        content.addComponent(ok);
 	        Button cancel = new Button("Cancel");
 	        cancel.addClickListener(new ClickListener() {
 	            public void buttonClick(ClickEvent event) {
 	                close(); // Close the sub-window
 	            }
 	        });
-	        content.addComponent(cancel);
+	        cancel.addStyleName("dr-window-adminbutton");
+	        content.addComponent(new HorizontalLayout(ok, cancel));
 	    }
 	}
 
