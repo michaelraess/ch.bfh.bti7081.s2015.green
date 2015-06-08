@@ -93,7 +93,7 @@ public class GeneralController extends UI {
 		
 		menu.addView(av, AdminView.NAME, AdminView.NAME, FontAwesome.COGS);
 
-		navigator.addView(PatientsView.NAME + "/1", new PatientDataView());
+		//navigator.addView(PatientsView.NAME + "/1", new PatientDataView());
 
 		navigator.addViewChangeListener(viewChangeListener);
 		
