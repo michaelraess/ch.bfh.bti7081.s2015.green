@@ -2,6 +2,7 @@ package ch.bfh.bti7081.s2015.green.DoctorsRegistry.entity;
 
 public class Patient {
 	
+	private int id;
 	private String firstname;
 	private String lastname;
 	private String street;
@@ -31,6 +32,8 @@ public class Patient {
 		this.email = "";
 		this.height = 0;
 		this.weight = 0;
+		this.vegetarian = false;
+		this.smoker = false;
 		this.bloodType = "";
 		this.allergies = "";
 		this.intolerances = "";
@@ -38,6 +41,12 @@ public class Patient {
 		this.biography = "";
 	}
 	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getFirstname() {
 		return firstname;
 	}
