@@ -33,8 +33,9 @@ public class AdminView extends VerticalLayout implements View {
 	
 	public AdminView() {
 
+		userTable.setSelectable(true);
+
 		this.setStyleName("dr-wrapper");
-		
 		Label title = new Label("Admin");
 		
 		title.addStyleName(ValoTheme.LABEL_H2);
@@ -54,7 +55,6 @@ public class AdminView extends VerticalLayout implements View {
 		
 		Button deleteUser = new Button("delete User");
 		deleteUser.addStyleName(ValoTheme.BUTTON_DANGER +" dr-adminbutton");
-
 		
 		deleteUser.addListener(new Listener() {
 			
