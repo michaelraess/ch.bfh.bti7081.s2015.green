@@ -5,18 +5,11 @@ import java.util.ArrayList;
 public class Case {
 	
 	private int id = -1;
-	private long created = -1;
+	private String createdDate = null;
+	private String createdTime = null;
 	private ArrayList<Appointment> alAppnmts = null;
-	private int userId = -1;
-	private int patientId = -1;
-
-	public long getCreated() {
-		return created;
-	}
-
-	public void setCreated(long created) {
-		this.created = created;
-	}
+	private User doctor = null;
+	private Patient patient = null;
 
 	public ArrayList<Appointment> getAlAppnmt() {
 		return alAppnmts;
@@ -26,20 +19,20 @@ public class Case {
 		this.alAppnmts = alAppnmt;
 	}
 
-	public int getUserId() {
-		return userId;
+	public User getDoctor() {
+		return doctor;
 	}
 
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setDoctor(User doctor) {
+		this.doctor = doctor;
 	}
 
-	public int getPatientId() {
-		return patientId;
+	public Patient getPatient() {
+		return patient;
 	}
 
-	public void setPatientId(int patientId) {
-		this.patientId = patientId;
+	public void setPatient(Patient patient) {
+		this.patient = patient;
 	}
 
 	public int getId() {
@@ -48,6 +41,22 @@ public class Case {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(String createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	public String getCreatedTime() {
+		return createdTime;
+	}
+
+	public void setCreatedTime(String createdTime) {
+		this.createdTime = createdTime;
 	}
 
 }

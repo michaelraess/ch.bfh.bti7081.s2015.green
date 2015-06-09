@@ -12,6 +12,7 @@ import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.CheckBox;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Notification;
@@ -83,11 +84,10 @@ public class AdminView extends VerticalLayout implements View {
 	
 	void refreshTable() {
 		ArrayList<User> allUser = um.getAllUsers(0);
-		userTable.setContainerDataSource(new BeanItemContainer<>(User.class, allUser));
-		userTable.setVisibleColumns(new Object[] {"id", "email", "password"} );
-		userTable.setColumnHeaders( new String[] {"ID", "eMail", "Password"} );
+		userTable.setContainerDataSource(new BeanItemContainer<User>(User.class, allUser));
+		userTable.setVisibleColumns(new Object[] {"id", "email", "firstName", "lastName", "isDoctorString"} );
+		userTable.setColumnHeaders( new String[] {"ID", "eMail", "First Name", "Last Name", "Is Doctor"} );
 		userTable.setPageLength(userTable.size());
-
 	}
 
 
@@ -146,9 +146,12 @@ public class AdminView extends VerticalLayout implements View {
 		
         TextField eMail = new TextField("E-Mail");
         PasswordField password = new PasswordField("Password");
+        TextField firstName = new TextField("First Name");
+        TextField lastName = new TextField("Last Name");
+        CheckBox isDoctor = new CheckBox("Is Doctor"); 
         
 	    public CreateUserWindow() {
-	        super("Create User"); // Set window caption
+	        super("Create User/Doctor"); // Set window caption
 
 	        center();
 
@@ -158,6 +161,9 @@ public class AdminView extends VerticalLayout implements View {
 	        //content.addComponent(new Label("Create new User"));
 	        content.addComponent(eMail);
 	        content.addComponent(password);
+	        content.addComponent(firstName);
+	        content.addComponent(lastName);
+	        content.addComponent(isDoctor);
 	        content.setMargin(true);
 	        setContent(content);
 	        
@@ -166,7 +172,7 @@ public class AdminView extends VerticalLayout implements View {
 	        ok.addStyleName("dr-window-adminbutton");
 	        ok.addClickListener(new ClickListener() {
 	            public void buttonClick(ClickEvent event) {
-	            	um.addUser(eMail.getValue(), password.getValue());
+	            	um.addUser(eMail.getValue(), password.getValue(), firstName.getValue(), lastName.getValue(), isDoctor.getValue());
 	            	refreshTable();
 	                close(); // Close the sub-window
 	            }

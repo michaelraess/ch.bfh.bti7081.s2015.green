@@ -98,12 +98,12 @@ public class GeneralController extends UI {
 		navigator.addViewChangeListener(viewChangeListener);
 		
 		//Assign Methods
-		dv.setControlActions(new ControlActions() {
+		/*dv.setControlActions(new ControlActions() {
 			@Override
 			public void createNewCase(ClickEvent event) {
 				navigator.navigateTo(StateLogicView.NAME);
 			}
-		});
+		});*/
 		
 		//Adding to the main Pane
 		mainVl.addComponent(menu);

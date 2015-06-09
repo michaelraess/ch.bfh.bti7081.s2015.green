@@ -30,66 +30,93 @@ public class PatientModel extends DefaultModel {
 		return patients.get(0);
 	}
 	
+	public ArrayList<Patient> getAllWithoutCase() {
+		String queryString = String.format("MATCH (p:%s),(c:Case) WHERE NOT (c:Case)-[:FOR]->(p) RETURN p", LABEL);
+		Iterable<Node> list = this.getQueryEngine().query(queryString, null).to(Node.class);
+		
+		return convertToArrayList(list);
+	}
+	
+	public ArrayList<Patient> getAllWithCase() {
+		String queryString = String.format("MATCH (p:%s),(c:Case) WHERE (c:Case)-[:FOR]->(p) RETURN p", LABEL);
+		Iterable<Node> list = this.getQueryEngine().query(queryString, null).to(Node.class);
+		
+		return convertToArrayList(list);
+	}
+	
+	public Patient getCasePatient(int caseId) {
+		String queryString = String.format("MATCH (p:%s),(c:Case) WHERE c.id=%d AND (c:Case)-[:FOR]->(p) RETURN p", LABEL, caseId);
+		Node cpNode = this.getQueryEngine().query(queryString, null).to(Node.class).single();
+		
+		return this.resolvePatientFields(cpNode);
+	}
+	
+	private Patient resolvePatientFields(Node n) {
+		Patient patient = new Patient();
+		
+		if (n.hasProperty("id")) {
+			patient.setId((int) n.getProperty("id"));
+		}
+		if (n.hasProperty("firstname")) {
+			patient.setFirstname((String) n.getProperty("firstname"));
+		}
+		if (n.hasProperty("lastname")) {
+			patient.setLastname((String) n.getProperty("lastname"));
+		}
+		if (n.hasProperty("street")) {
+			patient.setStreet((String) n.getProperty("street"));
+		}
+		if (n.hasProperty("zip")) {
+			patient.setZip((String) n.getProperty("zip"));
+		}
+		if (n.hasProperty("place")) {
+			patient.setPlace((String) n.getProperty("place"));
+		}
+		if (n.hasProperty("phone")) {
+			patient.setPhone((String) n.getProperty("phone"));
+		}
+		if (n.hasProperty("mobile")) {
+			patient.setMobile((String) n.getProperty("mobile"));
+		}
+		if (n.hasProperty("email")) {
+			patient.setEmail((String) n.getProperty("email"));
+		}
+		if (n.hasProperty("height")) {
+			patient.setHeight((int) n.getProperty("height"));
+		}
+		if (n.hasProperty("weight")) {
+			patient.setWeight((int) n.getProperty("weight"));
+		}
+		if (n.hasProperty("vegetarian")) {
+			patient.setVegetarian(((int) n.getProperty("vegetarian") != 0));
+		}
+		if (n.hasProperty("smoker")) {
+			patient.setSmoker(((int) n.getProperty("smoker") != 0));
+		}
+		if (n.hasProperty("bloodType")) {
+			patient.setBloodType((String) n.getProperty("bloodType"));
+		}
+		if (n.hasProperty("allergies")) {
+			patient.setAllergies((String) n.getProperty("allergies"));
+		}
+		if (n.hasProperty("intolerances")) {
+			patient.setIntolerances((String) n.getProperty("intolerances"));
+		}
+		if (n.hasProperty("generalNotes")) {
+			patient.setGeneralNotes((String) n.getProperty("generalNotes"));
+		}
+		if (n.hasProperty("biography")) {
+			patient.setBiography((String) n.getProperty("biography"));
+		}
+		
+		return patient;
+	}
+
 	private ArrayList<Patient> convertToArrayList(Iterable<Node> list) {
 		ArrayList<Patient> patients = new ArrayList<Patient>();
 		
-		for (Node p : list) {
-			Patient patient = new Patient();
-			
-			if (p.hasProperty("id")) {
-				patient.setId((int) p.getProperty("id"));
-			}
-			if (p.hasProperty("firstname")) {
-				patient.setFirstname((String) p.getProperty("firstname"));
-			}
-			if (p.hasProperty("lastname")) {
-				patient.setLastname((String) p.getProperty("lastname"));
-			}
-			if (p.hasProperty("street")) {
-				patient.setStreet((String) p.getProperty("street"));
-			}
-			if (p.hasProperty("zip")) {
-				patient.setZip((String) p.getProperty("zip"));
-			}
-			if (p.hasProperty("place")) {
-				patient.setPlace((String) p.getProperty("place"));
-			}
-			if (p.hasProperty("phone")) {
-				patient.setPhone((String) p.getProperty("phone"));
-			}
-			if (p.hasProperty("mobile")) {
-				patient.setMobile((String) p.getProperty("mobile"));
-			}
-			if (p.hasProperty("email")) {
-				patient.setEmail((String) p.getProperty("email"));
-			}
-			if (p.hasProperty("height")) {
-				patient.setHeight((int) p.getProperty("height"));
-			}
-			if (p.hasProperty("weight")) {
-				patient.setWeight((int) p.getProperty("weight"));
-			}
-			if (p.hasProperty("vegetarian")) {
-				patient.setVegetarian(((int) p.getProperty("vegetarian") != 0));
-			}
-			if (p.hasProperty("smoker")) {
-				patient.setSmoker(((int) p.getProperty("smoker") != 0));
-			}
-			if (p.hasProperty("bloodType")) {
-				patient.setBloodType((String) p.getProperty("bloodType"));
-			}
-			if (p.hasProperty("allergies")) {
-				patient.setAllergies((String) p.getProperty("allergies"));
-			}
-			if (p.hasProperty("intolerances")) {
-				patient.setIntolerances((String) p.getProperty("intolerances"));
-			}
-			if (p.hasProperty("generalNotes")) {
-				patient.setGeneralNotes((String) p.getProperty("generalNotes"));
-			}
-			if (p.hasProperty("biography")) {
-				patient.setBiography((String) p.getProperty("biography"));
-			}
+		for (Node n : list) {
+			Patient patient = this.resolvePatientFields(n);
 			
 			patients.add(patient);
 		}

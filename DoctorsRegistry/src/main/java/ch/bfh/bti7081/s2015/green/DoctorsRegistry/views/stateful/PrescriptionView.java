@@ -23,7 +23,7 @@ public class PrescriptionView extends VerticalLayout implements DRStates, View {
 
 	@Override
 	public void selectView(final StateContext context, final AbstractOrderedLayout v) {
-		Label l = new Label("New Appointment");
+		Label l = new Label("Print Meeting Summary");
 		l.addStyleName(ValoTheme.LABEL_H2);
 		v.addComponent(l);
 		

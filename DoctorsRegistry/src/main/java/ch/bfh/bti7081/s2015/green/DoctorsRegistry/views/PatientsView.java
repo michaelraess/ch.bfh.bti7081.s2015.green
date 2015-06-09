@@ -130,6 +130,7 @@ public class PatientsView extends VerticalLayout implements View {
 			btnDelete.setData(p.getId());
 			btnDelete.setStyleName("patients-button-delete");
 			btnDelete.setIcon(FontAwesome.TRASH_O);
+			btnDelete.addStyleName(ValoTheme.BUTTON_DANGER);
 			patient.addComponent(btnDelete);
 			
 			patients.addComponent(patient);
