@@ -229,3 +229,15 @@
  - Theorie Block
  - Teammeeting via Hangouts
  - Scrum Sprint
+
+# 05.06.2015
+- Wer war anwesend: HW: Reto, Sergii, Tobias, Michael, Nalet)
+- Was haben wir gemacht:
+ - Scrum Sprint
+ - Meeting via Hangouts
+
+# 09.06.2015
+- Wer war anwesend: Reto, Sergii, Tobias, Michael, Nalet
+- Was haben wir gemacht:
+ - Schlusspräsentation
+ - Besprechung der Beispiel-Prüfung
