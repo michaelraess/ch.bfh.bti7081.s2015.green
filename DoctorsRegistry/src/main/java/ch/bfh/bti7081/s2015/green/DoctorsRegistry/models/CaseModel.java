@@ -1,7 +1,5 @@
 package ch.bfh.bti7081.s2015.green.DoctorsRegistry.models;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 

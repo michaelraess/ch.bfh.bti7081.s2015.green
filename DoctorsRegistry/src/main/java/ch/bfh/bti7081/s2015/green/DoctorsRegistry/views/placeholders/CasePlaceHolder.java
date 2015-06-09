@@ -47,7 +47,7 @@ public class CasePlaceHolder extends VerticalLayout {
 		this.addComponent(lAppList);
 		
 		for(Appointment a : c.getAlAppnmt()) {
-			AppointmentPlaceholder ap = new AppointmentPlaceholder(a.getDate() + " " + a.getTime());
+			AppointmentPlaceholder ap = new AppointmentPlaceholder(a);
 			this.addComponent(ap);
 		}
 		

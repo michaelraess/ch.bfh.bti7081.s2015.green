@@ -38,5 +38,10 @@ public class Medication {
 	public void setDayDose(int dayDose) {
 		this.dayDose = dayDose;
 	}
+	
+	@Override
+	public String toString() {
+		return this.name;
+	}
 
 }

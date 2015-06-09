@@ -10,7 +10,6 @@ import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.LoginView;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.MedicationListView;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.MeetingView;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.Menu;
-import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.PatientDataView;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.PatientsView;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.stateful.StateLogicView;
 
@@ -35,7 +34,8 @@ public class GeneralController extends UI {
 	private static final long serialVersionUID = 5390254949054698917L;
 	private static final boolean isDebug = true;
 	//Variables
-	Menu menu = null;
+	public Menu menu = null;
+	public static Navigator globalNavigator;
 
 	@Override
 	protected void init(VaadinRequest request) {
@@ -78,6 +78,7 @@ public class GeneralController extends UI {
         
 		//Init Navigator
 		final Navigator navigator = new Navigator(this, viewContainer);
+		globalNavigator = navigator;
 		
 		//Views
 		DashboardView dv = new DashboardView();
