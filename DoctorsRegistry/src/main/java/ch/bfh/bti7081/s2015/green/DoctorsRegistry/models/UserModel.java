@@ -82,7 +82,7 @@ public class UserModel extends DefaultModel {
 	public void addUser(String email, String password, String first_name, String last_name, boolean isDoctor) {
 		int nextId = this.getLastIdFor(LABEL) + 1;
 		
-		String queryString = String.format("CREATE (n:%s { id : %d, email : '%s', password : '%s', first_name : %s, last_name : %s, is_doctor : %b })", 
+		String queryString = String.format("CREATE (n:%s { id : %d, email : '%s', password : '%s', first_name : '%s', last_name : '%s', is_doctor : %b })", 
 				LABEL, nextId, email, password, first_name, last_name, isDoctor);
 		this.getQueryEngine().query(queryString, null).to(Node.class);
 	}
