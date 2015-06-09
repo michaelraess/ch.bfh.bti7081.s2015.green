@@ -16,6 +16,8 @@ public class StateLogicView extends VerticalLayout implements View {
 
 	@Override
 	public void enter(ViewChangeEvent event) {
+		this.removeAllComponents();
+		
 		vlMain = new VerticalLayout();
 		
 		vlMain.setWidth("100%");

@@ -95,6 +95,12 @@
 		right: 5px;
 	}
 	
+	.patients-button-delete {
+		position: absolute;
+		top: 5px;
+		right: 60px;
+	}
+	
 
 	.v-csslayout.v-csslayout-valo-content {
 	  overflow-y: scroll;
@@ -117,5 +123,10 @@
 	}
 	.dr-window-adminbutton{
 		margin: 10px;
+	}
+	
+	.dr-dashboard-arrow {
+		margin-left: 10px;
+		margin-right: 10px;
 	}
 }

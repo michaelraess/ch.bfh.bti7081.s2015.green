@@ -55,6 +55,8 @@ public class Patient {
 		this.email = "";
 		this.height = 0;
 		this.weight = 0;
+		this.vegetarian = false;
+		this.smoker = false;
 		this.bloodType = "";
 		this.allergies = "";
 		this.intolerances = "";
@@ -62,6 +64,17 @@ public class Patient {
 		this.biography = "";
 	}
 	
+	@Override
+	public String toString() {
+		return this.firstname + " " + this.lastname;
+	}
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getFirstname() {
 		return firstname;
 	}
@@ -163,14 +176,6 @@ public class Patient {
 	}
 	public void setBiography(String biography) {
 		this.biography = biography;
-	}
-	
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 	
 }

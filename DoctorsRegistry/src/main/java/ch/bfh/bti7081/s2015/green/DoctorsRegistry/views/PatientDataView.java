@@ -1,18 +1,21 @@
 package ch.bfh.bti7081.s2015.green.DoctorsRegistry.views;
 
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.entity.Patient;
+import ch.bfh.bti7081.s2015.green.DoctorsRegistry.models.PatientModel;
 
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.data.fieldgroup.FieldGroup;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.server.FontAwesome;
+import com.vaadin.server.Page;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.TabSheet;
+import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Notification.Type;
 import com.vaadin.ui.TabSheet.SelectedTabChangeEvent;
 import com.vaadin.ui.TextArea;
@@ -25,46 +28,32 @@ public class PatientDataView extends CssLayout implements View {
 	private static final long serialVersionUID = 3085702648286504902L;
 	private TabSheet t;
 	
+	private PatientModel pm = new PatientModel();
 	private Patient patient;
 	private BeanFieldGroup<Patient> biographyBinding;
 
-	public PatientDataView() {
-		// Dummy patient
-		// TODO: Get correct patient
-		this.patient = new Patient();
-		patient.setFirstname("Melanie");
-		patient.setLastname("Rindiger");
-		patient.setStreet("Street 123");
-		patient.setZip("3000");
-		patient.setPlace("Bern");
-		patient.setPhone("033 123 45 67");
-		patient.setMobile("079 123 45 67");
-		patient.setEmail("melanie.rindiger@gmail.com");
-		patient.setHeight(170);
-		patient.setWeight(55);
-		patient.setVegetarian(true);
-		patient.setSmoker(false);
-		patient.setBloodType("A");
-		patient.setAllergies("-");
-		patient.setIntolerances("Lactose intolerance");
-		patient.setGeneralNotes("-");
-		patient.setBiography("-");
+	public PatientDataView(int id) {
+		patient = pm.get(id);
 		
-		this.setSizeUndefined();
-		this.setStyleName("patients-wrapper");
+		setSizeUndefined();
+		setStyleName("patients-wrapper");
 		
-		Label title = new Label("Melanie Rindiger");
+		Label title = new Label(patient.getFirstname() + " " + patient.getLastname());
 		title.setSizeUndefined();
 		title.addStyleName(ValoTheme.LABEL_H2);
 		title.addStyleName("patients-title");
-		this.addComponent(title);
+		addComponent(title);
 
         t = new TabSheet();
         t.setWidth("100%");
         t.addTab(getDataTab(), "Data", FontAwesome.EDIT);
         t.addTab(getBiographyTab(), "Biography", FontAwesome.EDIT);
 
-        this.addComponent(t);
+        addComponent(t);
+	}
+	
+	public PatientDataView getContent() {
+		return this;
 	}
 	
 	private VerticalLayout getDataTab() {
@@ -78,16 +67,28 @@ public class PatientDataView extends CssLayout implements View {
 		return vl;
 	}
 
+	@SuppressWarnings("serial")
 	private VerticalLayout getBiographyTab() {
 		VerticalLayout vl = new VerticalLayout();
 		vl.setMargin(true);
 		
 		PatientForm form = new PatientForm(patient, true);
 		
-		Button save = new Button("Save", this::saveBiography);
+		Button save = new Button("Save");
+		save.addClickListener(new Button.ClickListener() {
+		    public void buttonClick(ClickEvent event) {
+		    	try {
+		            biographyBinding.commit();
+
+		            pm.update(patient);
+
+		            Notification.show("Saved biography.", Type.TRAY_NOTIFICATION);
+		        } catch (FieldGroup.CommitException e) {}
+		    }
+		});
 		save.setStyleName(ValoTheme.BUTTON_PRIMARY);
 		
-		this.biographyBinding = BeanFieldGroup.bindFieldsBuffered(patient, form);
+		biographyBinding = BeanFieldGroup.bindFieldsBuffered(patient, form);
 		form.addComponent(save);
 		
 		vl.addComponent(form);
@@ -95,24 +96,12 @@ public class PatientDataView extends CssLayout implements View {
 		return vl;
 	}
 
-	private void saveBiography(Button.ClickEvent event) {
-		try {
-            this.biographyBinding.commit();
-
-            // Save patient biography in database
-
-            Notification.show("Saved biography.",Type.TRAY_NOTIFICATION);
-        } catch (FieldGroup.CommitException e) {}
-	}
-	
     public void selectedTabChange(SelectedTabChangeEvent event) {
-        // w/e may save?
+
     }
 	
-	@Override
 	public void enter(ViewChangeEvent event) {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 }

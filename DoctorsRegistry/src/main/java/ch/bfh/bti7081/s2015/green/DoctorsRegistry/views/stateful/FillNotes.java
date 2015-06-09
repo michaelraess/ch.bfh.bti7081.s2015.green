@@ -27,7 +27,7 @@ public class FillNotes extends VerticalLayout implements View, DRStates {
 		fl.setWidth("100%");
 		
 		TextArea notes = new TextArea();
-		notes.setWidth("95%");
+		notes.setWidth("500px");
 		notes.setHeight("300px");
 		fl.addComponent(notes);
 		
