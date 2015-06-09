@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.entity.Patient;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.entity.User;
+import ch.bfh.bti7081.s2015.green.DoctorsRegistry.models.CaseModel;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.models.PatientModel;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.models.UserModel;
 
@@ -59,7 +60,7 @@ public class CreatePatientView extends VerticalLayout implements View, DRStates 
 		ArrayList<Patient> alPatients = pm.getAllWithoutCase();
 		
 		for(Patient p : alPatients) {
-			patientSelect.addItem(p.getFirstname() + " " + p.getLastname());
+			patientSelect.addItem(p);
 		}
 		
 		fl.addComponent(patientSelect);
@@ -74,7 +75,7 @@ public class CreatePatientView extends VerticalLayout implements View, DRStates 
 		ArrayList<User> alDoctors = um.getAllDoctors();
 		
 		for(User p : alDoctors) {
-			doctorSelect.addItem(p.getFirstName() + " " + p.getLastName());
+			doctorSelect.addItem(p);
 		}
 		
 		fl.addComponent(doctorSelect);
@@ -126,6 +127,14 @@ public class CreatePatientView extends VerticalLayout implements View, DRStates 
 			@Override
 			public void buttonClick(ClickEvent event) {
 				if(validateForm()) {
+					CaseModel cm = new CaseModel();
+					
+					int caseId = cm.addCase();
+					cm.attachPatient(caseId, ((Patient)patientSelect.getValue()).getId());
+					cm.attachDoctor(caseId, ((User)doctorSelect.getValue()).getId());
+					
+					context.setCaseId(caseId);
+					
 					context.setState(new FillNotes());
 					context.invokeView(v);
 				} else {

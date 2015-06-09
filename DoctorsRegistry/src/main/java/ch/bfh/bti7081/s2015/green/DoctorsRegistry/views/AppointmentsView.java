@@ -5,12 +5,15 @@ import java.util.ArrayList;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.entity.Appointment;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.entity.Case;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.entity.Patient;
+import ch.bfh.bti7081.s2015.green.DoctorsRegistry.entity.User;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.models.AppointmentModel;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.models.CaseModel;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.models.PatientModel;
+import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.CreateEditModal.Invalidator;
 
 import com.vaadin.data.Item;
 import com.vaadin.data.Property;
+import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.data.util.ObjectProperty;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
@@ -34,13 +37,10 @@ import com.vaadin.ui.Window;
 import com.vaadin.ui.themes.ValoTheme;
 
 public class AppointmentsView extends VerticalLayout implements View {
-
-	public static final String NAME = "Appointments";
-	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 3085702648286504902L;
+	
+	public static final String NAME = "Appointments";
+	private final Table table = new Table();
 
 	public AppointmentsView() {
 		this.setWidth("100%");
@@ -58,6 +58,15 @@ public class AppointmentsView extends VerticalLayout implements View {
 		btnCreate.addClickListener(new ClickListener() {
 		    public void buttonClick(ClickEvent event) {
 		        CreateEditModal sub = new CreateEditModal();
+		        
+		        //Invalidate Table
+		        sub.setInvalidator(new Invalidator() {
+					
+					@Override
+					public void invalidate() {
+						refreshTable(10);
+					}
+				});
 		        
 		        // Add it to the root component
 		        UI.getCurrent().addWindow(sub);
@@ -82,7 +91,6 @@ public class AppointmentsView extends VerticalLayout implements View {
 		title.addStyleName("dr-title");
 		this.addComponent(title);
 		
-		Table table = new Table();
 		// Define two columns for the built-in container
 		table.addContainerProperty("Date", String.class, null);
 		table.addContainerProperty("Time", String.class, null);
@@ -90,9 +98,17 @@ public class AppointmentsView extends VerticalLayout implements View {
 		table.addContainerProperty("Description",  String.class, null);
 		table.addContainerProperty("Edit",  Button.class, null);
 		
+		refreshTable(limit);
+		
+		this.addComponent(table);
+	}
+	
+	public void refreshTable(int limit) {
 		//Showing real data
 		CaseModel cm = new CaseModel();
 		ArrayList<Case> alCases = cm.getAllCases(limit);
+		
+		table.removeAllItems();
 		
 		int i = 0;
 		for(Case c : alCases) {
@@ -116,8 +132,6 @@ public class AppointmentsView extends VerticalLayout implements View {
 		
 		// Show exactly the currently contained rows (items)
 		table.setPageLength(table.size());
-		
-		this.addComponent(table);
 	}
 	
 	private void addRandomAppointments(String strtitle, int count) {
@@ -160,7 +174,7 @@ public class AppointmentsView extends VerticalLayout implements View {
 
 	@Override
 	public void enter(ViewChangeEvent event) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
@@ -172,6 +186,13 @@ class CreateEditModal extends Window {
 	private static final long serialVersionUID = 5486179873268699265L;
 
 	ComboBox select = null;
+	InlineDateField date = null;
+	TextField tfDescr = null;
+	
+	private Invalidator invalidator = new Invalidator() {
+		@Override
+		public void invalidate() {}
+	};
 	
 	public CreateEditModal() {
 	     super("Appointment"); // Set window caption
@@ -192,7 +213,7 @@ class CreateEditModal extends Window {
 	     PatientModel pm = new PatientModel();
 	     ArrayList<Patient> alPatient = pm.getAllWithCase();
 	     for(Patient p : alPatient) {
-	    	 select.addItem(p.getFirstname() + " " + p.getLastname());
+	    	 select.addItem(p);
 	     }
 		         
 		 // User may not select a "null" item
@@ -201,15 +222,17 @@ class CreateEditModal extends Window {
 		  
 	     // Date & Time
 	     content.addComponent(getStyledLabel("Date & Time"));
-	     InlineDateField date = new InlineDateField();
-	     date.setResolution(Resolution.SECOND);
+	     
+	     date = new InlineDateField();
+	     date.setDateFormat("yyyy-MM-dd");
+	     date.setResolution(Resolution.MINUTE);
 	     // Set the date and time to present
 	     date.setValue(new java.util.Date());
 	     content.addComponent(date);
 		  
 	     // Description
 	     content.addComponent(getStyledLabel("Description"));
-	     TextField tfDescr = new TextField();
+	     tfDescr = new TextField();
 	     tfDescr.setWidth("100%");
 	     content.addComponent(tfDescr);
 	     
@@ -240,8 +263,18 @@ class CreateEditModal extends Window {
 
 			public void buttonClick(ClickEvent event) {
 				if(validateForm()) {
-					// TODO Save
-					close(); // Close the sub-window
+					// Save
+					Patient selectedPatient = (Patient)select.getValue();
+					long selectedDate = date.getValue().getTime();
+					String descr = tfDescr.getValue();
+					
+					AppointmentModel am = new AppointmentModel();
+					am.addAppointmentForPatient(selectedDate, descr, selectedPatient.getId());
+					
+					//Invalidate
+					CreateEditModal.this.invalidator.invalidate();
+					// Close the sub-window
+					close(); 
 				} else {
 					Notification.show("Error", "Please check the form", Notification.Type.ERROR_MESSAGE);
 				}
@@ -253,13 +286,25 @@ class CreateEditModal extends Window {
 	     content.addComponent(hl);
 	 }
 	 
-	 protected Label getStyledLabel(String title) {
-		 Label label = new Label(title);
-		 label.addStyleName(ValoTheme.LABEL_H4);
-		 return label;
-	 }
+	protected Label getStyledLabel(String title) {
+		Label label = new Label(title);
+		label.addStyleName(ValoTheme.LABEL_H4);
+		return label;
+	}
 	 
 	 public boolean validateForm() {
 		 return select.isValid();
+	 }
+	 
+	 public Invalidator getInvalidator() {
+		return invalidator;
+	}
+
+	public void setInvalidator(Invalidator invalidator) {
+		this.invalidator = invalidator;
+	}
+
+	public interface Invalidator {
+		 public void invalidate();
 	 }
 }

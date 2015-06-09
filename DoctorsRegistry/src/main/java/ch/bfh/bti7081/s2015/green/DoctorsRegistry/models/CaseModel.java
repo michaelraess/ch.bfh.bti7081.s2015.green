@@ -18,15 +18,27 @@ public class CaseModel extends DefaultModel {
 		super();
 	}
 
-	public void addCase() {
+	public int addCase() {
 		int nextId = this.getLastIdFor(LABEL) + 1;
 		
-		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		DateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
-		Date date = new Date();
+		String queryString = String.format("CREATE (n:%s { id : %d, timestamp : %d})", 
+				LABEL, nextId, (new Date()).getTime());
+		this.getQueryEngine().query(queryString, null).to(Node.class);
 		
-		String queryString = String.format("CREATE (n:%s { id : %d, created_date : %s, created_time : %s})", 
-				LABEL, nextId, dateFormat.format(date), timeFormat.format(date));
+		return nextId;
+	}
+	
+	public void attachPatient(int caseId, int patientId) {
+		String queryString = String.format("MATCH (c:Case),(p:Patient) WHERE c.id=%d AND p.id=%d "
+				+ "CREATE (c)-[f:FOR]->(p)", 
+				caseId, patientId);
+		this.getQueryEngine().query(queryString, null).to(Node.class);
+	}
+	
+	public void attachDoctor(int caseId, int doctorId) {
+		String queryString = String.format("MATCH (c:Case),(u:User) WHERE c.id=%d AND u.id=%d "
+				+ "CREATE (c)-[f:HELD_BY]->(u)", 
+				caseId, doctorId);
 		this.getQueryEngine().query(queryString, null).to(Node.class);
 	}
 	
@@ -54,12 +66,8 @@ public class CaseModel extends DefaultModel {
 			c.setId((int) n.getProperty("id"));
 		}
 		
-		if (n.hasProperty("created_date")) {
-			c.setCreatedDate((String) n.getProperty("created_date"));
-		}
-		
-		if (n.hasProperty("created_time")) {
-			c.setCreatedDate((String) n.getProperty("created_time"));
+		if (n.hasProperty("timestamp")) {
+			c.setTimestamp((long) n.getProperty("timestamp"));
 		}
 		
 		//Retrieve all appointments for this case

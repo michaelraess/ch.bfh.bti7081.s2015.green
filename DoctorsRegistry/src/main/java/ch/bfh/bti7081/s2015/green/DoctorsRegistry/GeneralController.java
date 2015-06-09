@@ -7,6 +7,8 @@ import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.AppointmentsView;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.DashboardView;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.DashboardView.ControlActions;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.LoginView;
+import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.MedicationListView;
+import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.MeetingView;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.Menu;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.PatientDataView;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.PatientsView;
@@ -85,10 +87,12 @@ public class GeneralController extends UI {
 		//Menu
 		menu = new Menu(navigator);
 		menu.addView(dv, "", DashboardView.NAME, FontAwesome.DASHBOARD);
-		menu.addView(cpv, StateLogicView.NAME, StateLogicView.NAME, FontAwesome.MALE);
+		//menu.addView(new MeetingView(), MeetingView.NAME, MeetingView.NAME, FontAwesome.AMBULANCE);
+		menu.addView(cpv, StateLogicView.NAME, StateLogicView.NAME, FontAwesome.AMBULANCE);
 		menu.addView(new AppointmentsView(), AppointmentsView.NAME, AppointmentsView.NAME, FontAwesome.CALENDAR);
 		//menu.addView(new CasesView(), CasesView.NAME, CasesView.NAME, FontAwesome.EDIT);
 		menu.addView(new PatientsView(), PatientsView.NAME, PatientsView.NAME, FontAwesome.MALE);
+		menu.addView(new MedicationListView(), MedicationListView.NAME, MedicationListView.NAME, FontAwesome.MEDKIT);
 		
 		
 		menu.addView(av, AdminView.NAME, AdminView.NAME, FontAwesome.COGS);
@@ -98,12 +102,12 @@ public class GeneralController extends UI {
 		navigator.addViewChangeListener(viewChangeListener);
 		
 		//Assign Methods
-		/*dv.setControlActions(new ControlActions() {
+		dv.setControlActions(new ControlActions() {
 			@Override
 			public void createNewCase(ClickEvent event) {
 				navigator.navigateTo(StateLogicView.NAME);
 			}
-		});*/
+		});
 		
 		//Adding to the main Pane
 		mainVl.addComponent(menu);

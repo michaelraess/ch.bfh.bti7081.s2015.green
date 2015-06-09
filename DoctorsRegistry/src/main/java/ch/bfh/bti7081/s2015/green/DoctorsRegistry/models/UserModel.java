@@ -17,7 +17,7 @@ public class UserModel extends DefaultModel {
 	public ArrayList<User> getAllUsers(int limit) {
 		ArrayList<User> userList = new ArrayList<User>();
 		
-		String queryString = String.format("MATCH (n:%s) RETURN n", LABEL);
+		String queryString = String.format("MATCH (n:%s) RETURN n LIMIT %d", LABEL, limit);
 		
 		Iterable<Node> resUsers = this.getQueryEngine().query(queryString, null).to(Node.class);
 		

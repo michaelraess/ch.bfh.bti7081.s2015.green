@@ -41,6 +41,11 @@ public class Patient {
 		this.biography = "";
 	}
 	
+	@Override
+	public String toString() {
+		return this.firstname + " " + this.lastname;
+	}
+	
 	public int getId() {
 		return id;
 	}

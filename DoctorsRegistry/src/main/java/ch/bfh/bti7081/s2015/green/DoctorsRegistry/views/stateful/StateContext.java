@@ -6,6 +6,7 @@ import com.vaadin.ui.Component;
 public class StateContext {
 	
 	private DRStates drState;
+	private int caseId = -1;
 	
 	public StateContext() {
 		this.setState(new CreatePatientView());
@@ -21,6 +22,14 @@ public class StateContext {
 			c.setVisible(false);
 		}
 		drState.selectView(this, v);
+	}
+
+	public int getCaseId() {
+		return caseId;
+	}
+
+	public void setCaseId(int caseId) {
+		this.caseId = caseId;
 	}
 	
 }

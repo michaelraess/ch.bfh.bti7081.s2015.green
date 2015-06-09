@@ -40,9 +40,14 @@ public class User {
 		this.password = password;
 	}
 	
-	@Override
+	/*@Override
 	public String toString() {
 		return "Id: " + this.id + "E-Mail: " + this.email + ";Password: " + this.password;
+	}*/
+	
+	@Override
+	public String toString() {
+		return this.first_name + " " + this.last_name;
 	}
 
 	public boolean isDoctor() {

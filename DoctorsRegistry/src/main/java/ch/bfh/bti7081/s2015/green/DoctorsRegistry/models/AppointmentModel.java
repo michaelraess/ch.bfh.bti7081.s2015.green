@@ -74,12 +74,19 @@ public class AppointmentModel extends DefaultModel {
 	public void addAppointment(String date, String time, String descr) throws ParseException {
 		int nextId = this.getLastIdFor(LABEL) + 1;
 		
-		String queryString = String.format("CREATE (n:%s { id : %d, timestamp : %d, descr : %s })", 
+		String queryString = String.format("CREATE (n:%s { id : %d, timestamp : %d, descr : \"%s\" })", 
 				LABEL, nextId, DateTimeConv.dateTime2Long(date, time), descr);
 		
 		this.getQueryEngine().query(queryString, null).to(Node.class);
 	}
 	
-	
+	public void addAppointmentForPatient(long timestamp, String descr, int patientId) {
+		int nextId = this.getLastIdFor(LABEL) + 1;
+		
+		String queryString = String.format("MATCH (p:Patient),(c:Case) WHERE p.id=%d AND (c)-[:FOR]-(p) CREATE (c)-[r:HAS]->(a:%s {id : %d, timestamp : %d, descr : \"%s\"})", 
+				patientId, LABEL, nextId, timestamp, descr);
+		
+		this.getQueryEngine().query(queryString, null).to(Node.class);
+	}
 
 }

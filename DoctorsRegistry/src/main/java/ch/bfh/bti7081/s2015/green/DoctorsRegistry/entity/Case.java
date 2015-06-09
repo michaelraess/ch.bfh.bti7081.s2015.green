@@ -5,8 +5,7 @@ import java.util.ArrayList;
 public class Case {
 	
 	private int id = -1;
-	private String createdDate = null;
-	private String createdTime = null;
+	private long timestamp = -1;
 	private ArrayList<Appointment> alAppnmts = null;
 	private User doctor = null;
 	private Patient patient = null;
@@ -43,20 +42,12 @@ public class Case {
 		this.id = id;
 	}
 
-	public String getCreatedDate() {
-		return createdDate;
+	public long getTimestamp() {
+		return timestamp;
 	}
 
-	public void setCreatedDate(String createdDate) {
-		this.createdDate = createdDate;
-	}
-
-	public String getCreatedTime() {
-		return createdTime;
-	}
-
-	public void setCreatedTime(String createdTime) {
-		this.createdTime = createdTime;
+	public void setTimestamp(long timestamp) {
+		this.timestamp = timestamp;
 	}
 
 }

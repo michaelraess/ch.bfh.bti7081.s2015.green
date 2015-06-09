@@ -22,7 +22,10 @@ public class DefaultModel extends RestGraphDatabase {
 	
 	protected int getLastIdFor(String label) {
 		String queryString = String.format("MATCH (n:%s) RETURN max(n.id)", label);
-		int crNode = this.getQueryEngine().query(queryString, null).to(Integer.class).single();
+		int crNode = 0;
+		try {
+			crNode = this.getQueryEngine().query(queryString, null).to(Integer.class).single();
+		} catch (Exception e) {}
 		
 		return crNode;
 	}

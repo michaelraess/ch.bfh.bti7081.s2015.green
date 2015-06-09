@@ -41,13 +41,16 @@ public class DashboardView extends VerticalLayout implements View {
 		this.createMainContent();
 	}
 
+	private VerticalLayout rightLayout = null;
+	private VerticalLayout casesLayout = null;
+	
 	private void createMainContent() {
 		HorizontalLayout hlMain = new HorizontalLayout();
 		hlMain.setWidth("100%");
 		this.addComponent(hlMain);
 		
 		//--Cases that we have
-		VerticalLayout rightLayout = new VerticalLayout();
+		rightLayout = new VerticalLayout();
 		Label zbf = new Label("Last Cases");
 		zbf.addStyleName(ValoTheme.LABEL_H3);
 		rightLayout.addComponent(zbf);
@@ -56,20 +59,26 @@ public class DashboardView extends VerticalLayout implements View {
 		patients.setSizeUndefined();
 		patients.setStyleName("patients-boxes");*/
 		
+		casesLayout = new VerticalLayout();
+		
+		rightLayout.addComponent(casesLayout);
+		hlMain.addComponent(rightLayout);
+		hlMain.setExpandRatio(rightLayout, 1);
+	}
+	
+	public void reloadCases() {
+		casesLayout.removeAllComponents();
 		try {
 			CaseModel cm = new CaseModel();
 			ArrayList<Case> alCases = cm.getAllCases(10);
 			
 			for(Case c : alCases) {
 				CasePlaceHolder cph = new CasePlaceHolder(c);
-				rightLayout.addComponent(cph);
+				casesLayout.addComponent(cph);
 			}
 		} catch (Exception e) {
 			
 		}
-		
-		hlMain.addComponent(rightLayout);
-		hlMain.setExpandRatio(rightLayout, 1);
 	}
 
 	private void createControlPanel() {
@@ -102,8 +111,7 @@ public class DashboardView extends VerticalLayout implements View {
 
 	@Override
 	public void enter(ViewChangeEvent event) {
-		// TODO Auto-generated method stub
-		
+		reloadCases();
 	}
 
 	public ControlActions getControlActions() {
