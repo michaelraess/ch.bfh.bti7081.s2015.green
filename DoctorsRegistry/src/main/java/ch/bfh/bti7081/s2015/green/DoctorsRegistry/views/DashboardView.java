@@ -3,21 +3,30 @@ package ch.bfh.bti7081.s2015.green.DoctorsRegistry.views;
 import java.util.ArrayList;
 
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.entity.Case;
+import ch.bfh.bti7081.s2015.green.DoctorsRegistry.entity.Patient;
+import ch.bfh.bti7081.s2015.green.DoctorsRegistry.entity.User;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.models.CaseModel;
+import ch.bfh.bti7081.s2015.green.DoctorsRegistry.models.PatientModel;
+import ch.bfh.bti7081.s2015.green.DoctorsRegistry.models.UserModel;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.placeholders.CasePlaceHolder;
 
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Notification;
+import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.Window;
 import com.vaadin.ui.Button.ClickEvent;
+import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.themes.ValoTheme;
 
 public class DashboardView extends VerticalLayout implements View {
 	private static final long serialVersionUID = -8781446538751439955L;
-	public static final String NAME = "Dashboard";
+	public static final String NAME = "Cases";
 	private ControlActions controlActions = new ControlActions() {
 		
 		@Override
@@ -90,7 +99,7 @@ public class DashboardView extends VerticalLayout implements View {
 		this.addComponent(hl);
 		
 		Button btnCreate = new Button();
-		btnCreate.setCaption("New Case");
+		btnCreate.setCaption("Create Case");
 		btnCreate.addStyleName(ValoTheme.BUTTON_FRIENDLY);
 		
 		btnCreate.addClickListener(new Button.ClickListener() {
@@ -98,11 +107,92 @@ public class DashboardView extends VerticalLayout implements View {
 
 			@Override
 			public void buttonClick(ClickEvent event) {
-				controlActions.createNewCase(event);
+				UI.getCurrent().addWindow(new CreateCaseWindow());
 			}
 		});
 		
 		hl.addComponent(btnCreate);
+	}
+	
+	class CreateCaseWindow extends Window {
+		private static final long serialVersionUID = 4480034605123114259L;
+		private ComboBox patientSelect = null;
+		private ComboBox doctorSelect = null;
+        
+	    public CreateCaseWindow() {
+	        super("Create Case"); // Set window caption
+	        center();
+
+	        // Some basic content for the window
+	        VerticalLayout content = new VerticalLayout();
+	        content.setMargin(true);
+	        setContent(content);
+	        
+	        //Select Patient Field
+			patientSelect = new ComboBox("Select Patient");
+			patientSelect.setRequired(true);
+			patientSelect.setRequiredError("You have to select a patient");
+			patientSelect.setImmediate(true);
+			patientSelect.setNullSelectionAllowed(false);
+			PatientModel pm = new PatientModel();
+			ArrayList<Patient> alPatients = pm.getAllWithoutCase();
+			
+			for(Patient p : alPatients) {
+				patientSelect.addItem(p);
+			}
+			
+			content.addComponent(patientSelect);
+			
+			//Select Doctor
+			doctorSelect = new ComboBox("Select Doctor");
+			doctorSelect.setRequired(true);
+			doctorSelect.setRequiredError("You have to select a doctor");
+			doctorSelect.setImmediate(true);
+			doctorSelect.setNullSelectionAllowed(false);
+			UserModel um = new UserModel();
+			ArrayList<User> alDoctors = um.getAllDoctors();
+			
+			for(User p : alDoctors) {
+				doctorSelect.addItem(p);
+			}
+			
+			content.addComponent(doctorSelect);
+	        
+	        // Trivial logic for closing the sub-window
+	        Button createBtn = new Button("Create");
+	        createBtn.addStyleName("dr-window-adminbutton");
+	        createBtn.addClickListener(new ClickListener() {
+				private static final long serialVersionUID = 7095064966678439199L;
+
+				public void buttonClick(ClickEvent event) {
+	            	if(validateForm()) {
+						CaseModel cm = new CaseModel();
+						
+						int caseId = cm.addCase();
+						cm.attachPatient(caseId, ((Patient)patientSelect.getValue()).getId());
+						cm.attachDoctor(caseId, ((User)doctorSelect.getValue()).getId());
+						
+						reloadCases();
+					} else {
+						Notification.show("Error", "Please check the form", Notification.Type.ERROR_MESSAGE);
+					}
+	            }
+	        });
+	        Button cancelBtn = new Button("Cancel");
+	        cancelBtn.addClickListener(new ClickListener() {
+				private static final long serialVersionUID = 4747244850324176779L;
+
+				public void buttonClick(ClickEvent event) {
+	                close(); // Close the sub-window
+	            }
+	        });
+	        cancelBtn.addStyleName("dr-window-adminbutton");
+	        content.addComponent(new HorizontalLayout(createBtn, cancelBtn));
+	    }
+	    
+	    public boolean validateForm() {
+			return this.patientSelect.isValid() && this.doctorSelect.isValid();
+		}
 	}
 	
 	public interface ControlActions {

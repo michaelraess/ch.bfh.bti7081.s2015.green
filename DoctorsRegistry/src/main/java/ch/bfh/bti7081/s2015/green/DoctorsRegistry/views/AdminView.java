@@ -44,10 +44,11 @@ public class AdminView extends VerticalLayout implements View {
 		Button newUser = new Button("new User");
 		newUser.addStyleName(ValoTheme.BUTTON_FRIENDLY +" dr-adminbutton");
 		
-		newUser.addListener(new Listener() {
-			
+		newUser.addClickListener(new Button.ClickListener() {
+			private static final long serialVersionUID = 2979497782161861241L;
+
 			@Override
-			public void componentEvent(Event event) {
+			public void buttonClick(ClickEvent event) {
 				UI.getCurrent().addWindow(new CreateUserWindow());
 			}
 		});
@@ -56,15 +57,14 @@ public class AdminView extends VerticalLayout implements View {
 		Button deleteUser = new Button("delete User");
 		deleteUser.addStyleName(ValoTheme.BUTTON_DANGER +" dr-adminbutton");
 		
-		deleteUser.addListener(new Listener() {
-			
+		deleteUser.addClickListener(new Button.ClickListener()  {
+			private static final long serialVersionUID = -4965441117870444423L;
+
 			@Override
-			public void componentEvent(Event event) {
+			public void buttonClick(ClickEvent event) {
 				if(userTable.getValue() != null) {
 					UI.getCurrent().addWindow(new DeleteUserWindow());
-				}
-				else
-				{
+				} else {
 					Notification.show("Warning", "Please select a user to delete!", Notification.Type.ERROR_MESSAGE);
 				}
 			}
@@ -92,13 +92,12 @@ public class AdminView extends VerticalLayout implements View {
 
 
 	@Override
-	public void enter(ViewChangeEvent event) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void enter(ViewChangeEvent event) {}
 	
 	class DeleteUserWindow extends Window {
-	    public DeleteUserWindow() {
+		private static final long serialVersionUID = -7797367126688215607L;
+
+		public DeleteUserWindow() {
 	        super("Delete User"); // Set window caption
 	        center();
 	        
@@ -120,7 +119,9 @@ public class AdminView extends VerticalLayout implements View {
 	        // Trivial logic for closing the sub-window
 	        Button ok = new Button("OK");
 	        ok.addClickListener(new ClickListener() {
-	            public void buttonClick(ClickEvent event) {
+				private static final long serialVersionUID = 5283413457708709405L;
+
+				public void buttonClick(ClickEvent event) {
 	            	User toDeleteUser = (User) userTable.getValue();
 	            	um.deleteUser(toDeleteUser);
 	                close(); // Close the sub-window
@@ -132,7 +133,9 @@ public class AdminView extends VerticalLayout implements View {
 
 	        Button cancel = new Button("Cancel");
 	        cancel.addClickListener(new ClickListener() {
-	            public void buttonClick(ClickEvent event) {
+				private static final long serialVersionUID = 8260811132805955083L;
+
+				public void buttonClick(ClickEvent event) {
 	                close(); // Close the sub-window
 	            }
 	        });
@@ -143,8 +146,9 @@ public class AdminView extends VerticalLayout implements View {
 	}
 	
 	class CreateUserWindow extends Window {
+		private static final long serialVersionUID = 6619334484249836704L;
 		
-        TextField eMail = new TextField("E-Mail");
+		TextField eMail = new TextField("E-Mail");
         PasswordField password = new PasswordField("Password");
         TextField firstName = new TextField("First Name");
         TextField lastName = new TextField("Last Name");
@@ -171,7 +175,9 @@ public class AdminView extends VerticalLayout implements View {
 	        Button ok = new Button("OK");
 	        ok.addStyleName("dr-window-adminbutton");
 	        ok.addClickListener(new ClickListener() {
-	            public void buttonClick(ClickEvent event) {
+				private static final long serialVersionUID = 3152464480037120579L;
+
+				public void buttonClick(ClickEvent event) {
 	            	um.addUser(eMail.getValue(), password.getValue(), firstName.getValue(), lastName.getValue(), isDoctor.getValue());
 	            	refreshTable();
 	                close(); // Close the sub-window
@@ -179,7 +185,9 @@ public class AdminView extends VerticalLayout implements View {
 	        });
 	        Button cancel = new Button("Cancel");
 	        cancel.addClickListener(new ClickListener() {
-	            public void buttonClick(ClickEvent event) {
+				private static final long serialVersionUID = 8470534126676202422L;
+
+				public void buttonClick(ClickEvent event) {
 	                close(); // Close the sub-window
 	            }
 	        });

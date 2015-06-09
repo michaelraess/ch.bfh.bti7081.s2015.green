@@ -102,14 +102,14 @@ public class PatientModel extends DefaultModel implements neoActions<Patient> {
 	}
 	
 	public ArrayList<Patient> getAllWithoutCase() {
-		String queryString = String.format("MATCH (p:%s),(c:Case) WHERE NOT (c:Case)-[:FOR]->(p) RETURN p", LABEL);
+		String queryString = String.format("MATCH (p:%s) WHERE NOT ()-[:FOR]->(p) RETURN p", LABEL);
 		Iterable<Node> list = this.getQueryEngine().query(queryString, null).to(Node.class);
 		
 		return convertToArrayList(list);
 	}
 	
 	public ArrayList<Patient> getAllWithCase() {
-		String queryString = String.format("MATCH (p:%s),(c:Case) WHERE (c:Case)-[:FOR]->(p) RETURN p", LABEL);
+		String queryString = String.format("MATCH (p:%s) WHERE ()-[:FOR]->(p) RETURN p", LABEL);
 		Iterable<Node> list = this.getQueryEngine().query(queryString, null).to(Node.class);
 		
 		return convertToArrayList(list);
