@@ -1,10 +1,7 @@
 package ch.bfh.bti7081.s2015.green.DoctorsRegistry.views.stateful;
 
 import java.util.ArrayList;
-import java.util.Date;
-
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.entity.Patient;
-import ch.bfh.bti7081.s2015.green.DoctorsRegistry.models.AppointmentModel;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.models.PatientModel;
 
 import com.vaadin.navigator.View;
@@ -14,8 +11,6 @@ import com.vaadin.ui.AbstractOrderedLayout;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.ComboBox;
-import com.vaadin.ui.DateField;
-import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.InlineDateField;
 import com.vaadin.ui.Label;
@@ -23,7 +18,6 @@ import com.vaadin.ui.Notification;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.themes.ValoTheme;
 
 public class CreateMeetingView extends VerticalLayout implements View, DRStates {

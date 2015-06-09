@@ -2,7 +2,6 @@ package ch.bfh.bti7081.s2015.green.DoctorsRegistry.views;
 
 import java.io.Serializable;
 
-import ch.bfh.bti7081.s2015.green.DoctorsRegistry.models.DefaultModel;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.models.UserModel;
 
 import com.vaadin.data.validator.AbstractValidator;

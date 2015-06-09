@@ -3,13 +3,11 @@ package ch.bfh.bti7081.s2015.green.DoctorsRegistry.views;
 import java.util.ArrayList;
 
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.entity.Medication;
-import ch.bfh.bti7081.s2015.green.DoctorsRegistry.entity.User;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.models.MedicationModel;
 
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
-import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
@@ -40,10 +38,11 @@ public class MedicationListView extends VerticalLayout implements View {
 		Button newUser = new Button("new Medication");
 		newUser.addStyleName(ValoTheme.BUTTON_FRIENDLY +" dr-adminbutton");
 		
-		newUser.addListener(new Listener() {
-			
+		newUser.addClickListener(new Button.ClickListener() {
+			private static final long serialVersionUID = -1440016071686400138L;
+
 			@Override
-			public void componentEvent(Event event) {
+			public void buttonClick(ClickEvent event) {
 				UI.getCurrent().addWindow(new CreateMedicationWindow());
 			}
 		});
@@ -86,54 +85,14 @@ public class MedicationListView extends VerticalLayout implements View {
 		userTable.setPageLength(userTable.size());
 	}
 	
-	class DeleteUserWindow extends Window {
-	    public DeleteUserWindow() {
-	        super("Delete User"); // Set window caption
-	        center();
-	        
-
-	        // Some basic content for the window
-	        VerticalLayout content = new VerticalLayout();
-	        User usr = (User) userTable.getValue();
-	        Label message = new Label("Do you want do delete: <br /> <br /> id: " +
-	        		usr.getId() + 
-	        		"<br />eMail: "+
-	        		usr.getEmail()+
-	        		"<br /><br />This action can not be undone!");
-	        message.setContentMode(ContentMode.HTML);
-	        content.addComponent(message);
-	        content.setMargin(true);
-	        setContent(content);
-	        
-
-	        // Trivial logic for closing the sub-window
-	        Button ok = new Button("OK");
-	        ok.addClickListener(new ClickListener() {
-	            public void buttonClick(ClickEvent event) {
-	            	User toDeleteUser = (User) userTable.getValue();
-	            	//um.deleteUser(toDeleteUser);
-	                close(); // Close the sub-window
-	                refreshTable();
-	                
-	            }
-	        });
-	        ok.addStyleName("dr-window-adminbutton");
-
-	        Button cancel = new Button("Cancel");
-	        cancel.addClickListener(new ClickListener() {
-	            public void buttonClick(ClickEvent event) {
-	                close(); // Close the sub-window
-	            }
-	        });
-	        cancel.addStyleName("dr-window-adminbutton");
-
-	        content.addComponent(new HorizontalLayout(ok, cancel));
-	    }
-	}
 	
 	class CreateMedicationWindow extends Window {
 		
-        TextField name = new TextField("Name");
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = -193434599304691681L;
+		TextField name = new TextField("Name");
         TextField descr = new TextField("Description");
         TextField dayDose = new TextField("Daily Dose");
         
@@ -164,7 +123,12 @@ public class MedicationListView extends VerticalLayout implements View {
 	        Button ok = new Button("OK");
 	        ok.addStyleName("dr-window-adminbutton");
 	        ok.addClickListener(new ClickListener() {
-	            public void buttonClick(ClickEvent event) {
+	            /**
+				 * 
+				 */
+				private static final long serialVersionUID = -5158141150532719181L;
+
+				public void buttonClick(ClickEvent event) {
 	            	if(validate()) {
 	            		mm.addMedication(name.getValue(), descr.getValue(), (Integer)dayDose.getConvertedValue());
 	            		refreshTable();
@@ -176,7 +140,12 @@ public class MedicationListView extends VerticalLayout implements View {
 	        });
 	        Button cancel = new Button("Cancel");
 	        cancel.addClickListener(new ClickListener() {
-	            public void buttonClick(ClickEvent event) {
+	            /**
+				 * 
+				 */
+				private static final long serialVersionUID = -8921450779389645566L;
+
+				public void buttonClick(ClickEvent event) {
 	                close(); // Close the sub-window
 	            }
 	        });

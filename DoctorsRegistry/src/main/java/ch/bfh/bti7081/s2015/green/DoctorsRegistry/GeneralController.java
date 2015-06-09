@@ -32,7 +32,7 @@ import com.vaadin.ui.UI;
 @Widgetset("ch.bfh.bti7081.s2015.green.DoctorsRegistry.DrAppWidgetset")
 public class GeneralController extends UI {
 	private static final long serialVersionUID = 5390254949054698917L;
-	private static final boolean isDebug = true;
+	private static final boolean isDebug = false;
 	//Variables
 	public Menu menu = null;
 	public static Navigator globalNavigator;
@@ -82,7 +82,7 @@ public class GeneralController extends UI {
 		
 		//Views
 		DashboardView dv = new DashboardView();
-		StateLogicView cpv = new StateLogicView();
+		//StateLogicView cpv = new StateLogicView();
 		AdminView av = new AdminView();
 		
 		//Menu

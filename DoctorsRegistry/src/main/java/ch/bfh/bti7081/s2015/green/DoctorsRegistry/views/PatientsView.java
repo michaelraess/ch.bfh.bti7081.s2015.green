@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.entity.Patient;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.models.PatientModel;
 
-import com.google.gwt.user.client.Window.Navigator;
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.data.fieldgroup.FieldGroup;
 import com.vaadin.event.ShortcutAction;

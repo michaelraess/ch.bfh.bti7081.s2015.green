@@ -13,8 +13,8 @@ import com.vaadin.ui.themes.Reindeer;
  * 
  */
 public class ErrorView extends VerticalLayout implements View {
-
-    private Label explanation;
+	private static final long serialVersionUID = -3807845160615254557L;
+	private Label explanation;
 
     public ErrorView() {
         setMargin(true);

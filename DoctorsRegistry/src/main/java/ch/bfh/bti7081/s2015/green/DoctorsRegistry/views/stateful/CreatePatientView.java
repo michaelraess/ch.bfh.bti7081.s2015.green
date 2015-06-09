@@ -19,17 +19,12 @@ import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Notification;
-import com.vaadin.ui.Select;
-import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 
 public class CreatePatientView extends VerticalLayout implements View, DRStates {
 	private static final long serialVersionUID = -6639140066232100367L;
-
-	private TextField patientFirstName = null;
-	private TextField patientLastName = null;
-	
+		
 	private ComboBox patientSelect = null;
 	private ComboBox doctorSelect = null;
 	

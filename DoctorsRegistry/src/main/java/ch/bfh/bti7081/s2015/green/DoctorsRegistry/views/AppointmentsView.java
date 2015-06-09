@@ -50,7 +50,9 @@ public class AppointmentsView extends VerticalLayout implements View {
 		btnCreate.setCaption("Add Appointment");
 		btnCreate.addStyleName(ValoTheme.BUTTON_FRIENDLY + " " + ValoTheme.BUTTON_SMALL + " dr-button-add");
 		btnCreate.addClickListener(new ClickListener() {
-		    public void buttonClick(ClickEvent event) {
+			private static final long serialVersionUID = -530437328476126974L;
+
+			public void buttonClick(ClickEvent event) {
 		        CreateEditModal sub = new CreateEditModal();
 		        
 		        //Invalidate Table
@@ -110,7 +112,9 @@ public class AppointmentsView extends VerticalLayout implements View {
 				final Button edit = new Button();
 				edit.setIcon(FontAwesome.EDIT);
 				edit.addClickListener(new ClickListener() {
-				    public void buttonClick(ClickEvent event) {
+					private static final long serialVersionUID = -1214466229139078698L;
+
+					public void buttonClick(ClickEvent event) {
 				        CreateEditModal sub = new CreateEditModal();
 				        
 				        // Add it to the root component
@@ -128,7 +132,7 @@ public class AppointmentsView extends VerticalLayout implements View {
 		table.setPageLength(table.size());
 	}
 	
-	private void addRandomAppointments(String strtitle, int count) {
+	/*private void addRandomAppointments(String strtitle, int count) {
 		Label title = new Label(strtitle);
 		title.setSizeUndefined();
 		title.addStyleName(ValoTheme.LABEL_H3);
@@ -146,7 +150,10 @@ public class AppointmentsView extends VerticalLayout implements View {
 			final Button edit = new Button();
 			edit.setIcon(FontAwesome.EDIT);
 			edit.addClickListener(new ClickListener() {
-			    public void buttonClick(ClickEvent event) {
+			    
+				private static final long serialVersionUID = 3788943925918799225L;
+
+				public void buttonClick(ClickEvent event) {
 			        CreateEditModal sub = new CreateEditModal();
 			        
 			        // Add it to the root component
@@ -163,7 +170,7 @@ public class AppointmentsView extends VerticalLayout implements View {
 		
 		this.addComponent(table);
 	}
-	
+*/	
 	
 
 	@Override

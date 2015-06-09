@@ -62,7 +62,8 @@ public class Menu extends CssLayout {
         // logout menu item
         MenuBar logoutMenu = new MenuBar();
         logoutMenu.addItem("Logout", FontAwesome.SIGN_OUT, new Command() {
-        	
+			private static final long serialVersionUID = -4029332663002821796L;
+
 			@Override
 			public void menuSelected(MenuItem selectedItem) {
 				getSession().setAttribute("user", null);
@@ -76,7 +77,8 @@ public class Menu extends CssLayout {
 
         // button for toggling the visibility of the menu when on a small screen
         final Button showMenu = new Button("Menu", new Button.ClickListener() {
-			
+			private static final long serialVersionUID = 2078454610142404940L;
+
 			@Override
 			public void buttonClick(ClickEvent event) {
 				if (menuPart.getStyleName().contains(VALO_MENU_VISIBLE)) {
@@ -144,8 +146,9 @@ public class Menu extends CssLayout {
     private void createViewButton(final String name, String caption,
             Resource icon) {
         Button button = new Button(caption, new Button.ClickListener() {
+			private static final long serialVersionUID = 3967216491537592707L;
 
-            @Override
+			@Override
             public void buttonClick(ClickEvent event) {
             	if(!name.equals("")) {
             		Page.getCurrent().setTitle(name + " | Doctor's Registry");
