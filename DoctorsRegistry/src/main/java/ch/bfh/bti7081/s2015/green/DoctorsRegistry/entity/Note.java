@@ -2,6 +2,7 @@ package ch.bfh.bti7081.s2015.green.DoctorsRegistry.entity;
 
 public class Note {
 	
+	private int id = -1;
 	private int appointmentId = -1;
 	private String noteText = "";
 
@@ -19,6 +20,14 @@ public class Note {
 
 	public void setAppointmentId(int appointmentId) {
 		this.appointmentId = appointmentId;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 }

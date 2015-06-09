@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.GeneralController;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.entity.Medication;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.entity.PatientMedication;
+import ch.bfh.bti7081.s2015.green.DoctorsRegistry.models.AppointmentModel;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.models.MedicationModel;
+import ch.bfh.bti7081.s2015.green.DoctorsRegistry.models.NoteModel;
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.models.PatientMedicationModel;
 
 import com.vaadin.data.util.BeanItemContainer;
@@ -56,6 +58,8 @@ public class MeetingView extends VerticalLayout implements View {
 				GeneralController.globalNavigator.navigateTo("");
 			}
 			
+			this.removeAllComponents();
+			
 			//Show UI
 			HorizontalLayout generalView = new HorizontalLayout();
 			generalView.setWidth("100%");
@@ -66,7 +70,7 @@ public class MeetingView extends VerticalLayout implements View {
 			notesLabel.addStyleName(ValoTheme.LABEL_H3);
 			notesView.addComponent(notesLabel);
 			
-			TextArea taNotes = new TextArea();
+			final TextArea taNotes = new TextArea();
 			taNotes.setWidth("100%");
 			taNotes.setHeight("500px");
 			notesView.addComponent(taNotes);
@@ -102,6 +106,20 @@ public class MeetingView extends VerticalLayout implements View {
 			//Finish
 			Button btnFinish = new Button("Finishs Meeting");
 			btnFinish.addStyleName(ValoTheme.BUTTON_FRIENDLY);
+			btnFinish.addClickListener(new ClickListener() {
+				private static final long serialVersionUID = 139886693859262605L;
+
+				@Override
+				public void buttonClick(ClickEvent event) {
+					AppointmentModel am = new AppointmentModel();
+					am.setFinished(MeetingView.this.meetingId);
+					
+					NoteModel nm = new NoteModel();
+					nm.addNoteToAppointment(MeetingView.this.meetingId, taNotes.getValue());
+					
+					GeneralController.globalNavigator.navigateTo("");
+				}
+			});
 			this.addComponent(btnFinish);
 			this.setComponentAlignment(btnFinish, Alignment.MIDDLE_RIGHT);
 		}

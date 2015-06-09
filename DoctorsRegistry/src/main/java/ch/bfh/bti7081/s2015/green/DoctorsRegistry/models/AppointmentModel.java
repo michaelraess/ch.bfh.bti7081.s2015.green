@@ -1,9 +1,7 @@
 package ch.bfh.bti7081.s2015.green.DoctorsRegistry.models;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Map;
 
 import org.neo4j.graphdb.Node;
 
@@ -21,7 +19,7 @@ public class AppointmentModel extends DefaultModel {
 	public ArrayList<Appointment> getNextAppointments(int limit) {
 		ArrayList<Appointment> appointmentList = new ArrayList<Appointment>();
 		
-		String queryString = String.format("MATCH (n:%s) RETURN n ORDER BY n.timestamp LIMIT %d", LABEL, limit);
+		String queryString = String.format("MATCH (n:%s) WHERE n.finished=null RETURN n ORDER BY n.timestamp LIMIT %d", LABEL, limit);
 		
 		Iterable<Node> resAppointments = this.getQueryEngine().query(queryString, null).to(Node.class);
 		
@@ -39,7 +37,7 @@ public class AppointmentModel extends DefaultModel {
 	public ArrayList<Appointment> getCaseAppointments(int caseId) {
 		ArrayList<Appointment> alAppointments = new ArrayList<Appointment>();
 		
-		String queryString = String.format("MATCH (a:%s), (c:Case) WHERE c.id=%d AND (c)-[:HAS]-(a) RETURN a", LABEL, caseId);
+		String queryString = String.format("MATCH (a:%s), (c:Case) WHERE c.id=%d AND (c)-[:HAS]-(a) AND NOT HAS(a.finished) RETURN a", LABEL, caseId);
 		Iterable<Node> resAppointments = this.getQueryEngine().query(queryString, null).to(Node.class);
 		
 		for(Node resAppointment : resAppointments) {
@@ -51,6 +49,13 @@ public class AppointmentModel extends DefaultModel {
 		}
 		
 		return alAppointments;
+	}
+	
+	public void setFinished(int appntmntId) {
+		String queryString = String.format("MATCH (a:%s) WHERE a.id=%d SET a.finished=true", 
+				LABEL, appntmntId);
+		
+		this.getQueryEngine().query(queryString, null).to(Node.class);
 	}
 	
 	private Appointment resolveAppointmentFields(Node n) {
