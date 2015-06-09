@@ -1,6 +1,7 @@
 package ch.bfh.bti7081.s2015.green.DoctorsRegistry.views;
 
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.entity.Patient;
+import ch.bfh.bti7081.s2015.green.DoctorsRegistry.models.PatientModel;
 
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.data.fieldgroup.FieldGroup;
@@ -35,6 +36,8 @@ public class PatientForm extends FormLayout {
     Patient patient;
 
     BeanFieldGroup<Patient> formFieldBindings;
+    
+    PatientModel patientModel = new PatientModel();
 
     public PatientForm() {
     	this.setMargin(true);
@@ -76,6 +79,8 @@ public class PatientForm extends FormLayout {
             String msg = String.format("Saved '%s %s'.",
             		patient.getFirstname(),
             		patient.getLastname());
+            
+            patientModel.save(patient);
             
             Notification.show(msg, Type.TRAY_NOTIFICATION);
         } catch (FieldGroup.CommitException e) {}

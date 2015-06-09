@@ -9,7 +9,7 @@ import ch.bfh.bti7081.s2015.green.DoctorsRegistry.entity.User;
 public class UserModel extends DefaultModel {
 	
 	private final String LABEL = "User";
-
+	
 	public UserModel() {
 		super();
 	}

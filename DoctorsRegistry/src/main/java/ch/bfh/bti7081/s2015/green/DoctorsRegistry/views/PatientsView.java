@@ -1,6 +1,7 @@
 package ch.bfh.bti7081.s2015.green.DoctorsRegistry.views;
 
 import ch.bfh.bti7081.s2015.green.DoctorsRegistry.entity.Patient;
+import ch.bfh.bti7081.s2015.green.DoctorsRegistry.models.PatientModel;
 
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.data.fieldgroup.FieldGroup;
@@ -20,6 +21,8 @@ public class PatientsView extends CssLayout implements View {
 	private Patient newPatient;
 	private Window modalNewPatient;
 	private BeanFieldGroup<Patient> formFieldBindings;
+	
+	PatientModel patientModel = new PatientModel();
 
 	public PatientsView() {
 		this.setSizeUndefined();
@@ -77,6 +80,8 @@ public class PatientsView extends CssLayout implements View {
             String msg = String.format("Added '%s %s'.",
             		newPatient.getFirstname(),
             		newPatient.getLastname());
+            
+            patientModel.save(newPatient);
             
             Notification.show(msg, Type.TRAY_NOTIFICATION);
         } catch (FieldGroup.CommitException e) {}

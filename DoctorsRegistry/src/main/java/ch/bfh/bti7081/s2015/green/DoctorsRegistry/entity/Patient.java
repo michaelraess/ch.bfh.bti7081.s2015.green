@@ -1,23 +1,47 @@
 package ch.bfh.bti7081.s2015.green.DoctorsRegistry.entity;
 
+import ch.bfh.bti7081.s2015.green.DoctorsRegistry.entity.annotations.neoEntity;
+import ch.bfh.bti7081.s2015.green.DoctorsRegistry.entity.annotations.neoId;
+import ch.bfh.bti7081.s2015.green.DoctorsRegistry.entity.annotations.neoProperty;
+
+@neoEntity
 public class Patient {
 	
+	@neoId
+	private int id;
+	@neoProperty
 	private String firstname;
+	@neoProperty
 	private String lastname;
+	@neoProperty
 	private String street;
+	@neoProperty
 	private String zip;
+	@neoProperty
 	private String place;
+	@neoProperty
 	private String phone;
+	@neoProperty
 	private String mobile;
+	@neoProperty
 	private String email;
+	@neoProperty
 	private Integer height;
+	@neoProperty
 	private Integer weight;
+	@neoProperty
 	private Boolean vegetarian;
+	@neoProperty
 	private Boolean smoker;
+	@neoProperty
 	private String bloodType;
+	@neoProperty
 	private String allergies;
+	@neoProperty
 	private String intolerances;
+	@neoProperty
 	private String generalNotes;
+	@neoProperty
 	private String biography;
 	
 	public Patient() {
@@ -139,6 +163,14 @@ public class Patient {
 	}
 	public void setBiography(String biography) {
 		this.biography = biography;
+	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 }
